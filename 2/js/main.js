@@ -48,9 +48,9 @@ function getRandomValue(minValue, maxValue, numberOfDigits) {
   result = (Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue) * Math.pow(10, -numberOfDigits);
   return result = result.toFixed(numberOfDigits);
 }
-getRandomValue(11, 10, 4);
-getRandomValue(-2, 7, 4);
-getRandomValue(3, 3.1, 2);
+getRandomValue(11, 10, 4);//10.0000
+getRandomValue(-2, 7, 4);//0.6452
+getRandomValue(3, 3.1, 2);//3.00
 // console.log('getRandomValue(11,10,4)= ' + getRandomValue(11, 10, 4));
 // console.log('getRandomValue(-2,7,4)= ' + getRandomValue(-2, 7, 4));
 // console.log('getRandomValue(3, 3.1, 2)= ' + getRandomValue(3, 3.1, 2));
