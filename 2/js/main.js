@@ -9,21 +9,21 @@
 // Учтите, что диапазон может быть только положительный, включая ноль. А также придумайте, как функция должна вести себя, если передать значение «до» меньшее,
 //чем значение «от», или равное ему.
 
-// function getRandomValue(min, max) { //Источник алгоритма https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-//   min = Math.ceil(min);
-//   max = Math.floor(max);
-//   if(min < 0) {
-//     min = 0; //если начальное значение диапазона отрицательное, то принимаем его равным "0"б так как по условию: "диапазон может быть только положительный, включая ноль."
-//   }
-//   if (min >= max){
-//     min = max - 1 //в случае, если передать значение «до» меньшее, чем значение «от», или равное ему, принимаем min на шаг меньше max.
-//   }
-//   return Math.floor(Math.random() * (max - min + 1)) + min;
-// }
-
-//   console.log('getRandomValue(11,10)= ' + getRandomValue(11,10));
-//   console.log('getRandomValue(-2,7)= ' + getRandomValue(-2,7));
-//   console.log('getRandomValue(3,10)= ' + getRandomValue(3,20));
+function getRandomValue(min, max) { //Источник алгоритма https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  if (min < 0) {
+    min = 0; //если начальное значение диапазона отрицательное, то принимаем его равным "0", так как по условию: "диапазон может быть только положительный, включая ноль."
+  }
+  if (min >= max) {
+    return 'Ошибка! Начальное значение диапазона, должно быть меньше конечного.'; //в случае, если передать значение «до» меньшее, чем значение «от», или равное ему, выводим сообщение об ошибке.
+  }
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+getRandomValue(3, 20);
+// console.log('getRandomValue(11,10)= ' + getRandomValue(11, 10));
+// console.log('getRandomValue(-2,7)= ' + getRandomValue(-2, 7));
+// console.log('getRandomValue(3,10)= ' + getRandomValue(3, 20));
 
 // Функция, возвращающая случайное число с плавающей точкой из переданного диапазона включительно.
 // Будет использоваться для генерации временных географических координат в следующем задании.
@@ -35,22 +35,21 @@
 // Не забудьте, что в случае с дробными числами диапазон может быть в десятых, сотых, тысячных и т. д. долях. Например, 1.1, 1.2 — корректный диапазон.
 
 
-function getRandomValue(minValue, maxValue, numberOfDigits) {
+function getRandomValueFloat(minValue, maxValue, numberOfDigits) {
   minValue = minValue * Math.pow(10, numberOfDigits);
   maxValue = maxValue * Math.pow(10, numberOfDigits);
   let result;
   if (minValue < 0) {
-    minValue = 0; //если начальное значение диапазона отрицательное, то принимаем его равным "0"б так как по условию: "диапазон может быть только положительный, включая ноль."
+    minValue = 0; //если начальное значение диапазона отрицательное, то принимаем его равным "0", так как по условию: "диапазон может быть только положительный, включая ноль."
   }
   if (minValue >= maxValue) {
-    minValue = maxValue - 1; //в случае, если передать значение «до» меньшее, чем значение «от», или равное ему, принимаем min на шаг меньше max.
+    return 'Ошибка! Начальное значение диапазона, должно быть меньше конечного.'; //в случае, если передать значение «до» меньшее, чем значение «от», или равное ему, выводим сообщение об ошибке.
+  }
+  if (numberOfDigits < 0) {
+    return 'Ошибка! Значение количества разрядов "numberOfDigits" , должно быть положительным.'; //в случае, если передать значение «до» меньшее, чем значение «от», или равное ему, выводим сообщение об ошибке.
   }
   result = (Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue) * Math.pow(10, -numberOfDigits);
   return result = result.toFixed(numberOfDigits);
 }
-getRandomValue(11, 10, 4);//10.0000
-getRandomValue(-2, 7, 4);//0.6452
-getRandomValue(3, 3.1, 2);//3.00
-// console.log('getRandomValue(11,10,4)= ' + getRandomValue(11, 10, 4));
-// console.log('getRandomValue(-2,7,4)= ' + getRandomValue(-2, 7, 4));
-// console.log('getRandomValue(3, 3.1, 2)= ' + getRandomValue(3, 3.1, 2));
+getRandomValueFloat(3, 3.1, -5);
+
