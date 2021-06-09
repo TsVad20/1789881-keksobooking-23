@@ -207,4 +207,4 @@ const newAd = function () {
     },
   };
 };
-
+newAd();
