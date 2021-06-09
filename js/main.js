@@ -19,7 +19,7 @@ const getRandomValue = function (min, max) { //Источник алгоритм
     return 'Ошибка! Начальное значение диапазона, должно быть меньше конечного.'; //в случае, если передать значение «до» меньшее, чем значение «от», или равное ему, выводим сообщение об ошибке.
   }
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+};
 getRandomValue(3, 20);
 // console.log('getRandomValue(11,10)= ' + getRandomValue(11, 10));
 // console.log('getRandomValue(-2,7)= ' + getRandomValue(-2, 7));
@@ -50,7 +50,7 @@ const getRandomValueFloat = function (minValue, maxValue, numberOfDigits) {
   }
   result = (Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue) * Math.pow(10, -numberOfDigits);
   return result = result.toFixed(numberOfDigits);
-}
+};
 getRandomValueFloat(3, 3.1, -5);
 
 /*В файле main.js на основе написанных в прошлом задании вспомогательных функций напишите необходимые функции для создания массива из 10 сгенерированных JS-объектов.
@@ -165,8 +165,8 @@ const getRandomLocation = function () {
   };
 };
 // присваивание координат переменным, для того, чтобы координаты 'location' и 'offer.address' были одинаковыми
-let randomLocationX = getRandomLocation().lat;
-let randomLocationY = getRandomLocation().lng;
+const randomLocationX = getRandomLocation().lat;
+const randomLocationY = getRandomLocation().lng;
 
 const newAd = function () {
   return {
