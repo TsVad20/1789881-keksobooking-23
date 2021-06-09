@@ -150,15 +150,15 @@ const listOfPhotos = [
   'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 // функция получения случайного значения из переданного массива
-let getRandomItem = function (exArr) {
+const getRandomItem = function (exArr) {
   return exArr[getRandomValue(0, exArr.length - 1)];
 };
 // функция получения случайного массива из элементов переданного
-let getRandomListItem = function (exArr) {
+const getRandomListItem = function (exArr) {
   return exArr.slice(0, getRandomValue(0, exArr.length + 1));
 };
 // функция получения случайных координат для обьекта 'location' и 'offer.address"
-let getRandomLocation = function () {
+const getRandomLocation = function () {
   return {
     lat: getRandomValueFloat(35.65000, 35.70000, 5),
     lng: getRandomValueFloat(139.70000, 139.80000, 5),
