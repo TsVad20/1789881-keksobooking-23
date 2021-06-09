@@ -147,8 +147,7 @@ const listOfFeatures = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', '
 const listOfPhotos = [
   'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
-];
+  'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
 // функция получения случайного значения из переданного массива
 const getRandomItem = function (exArr) {
   return exArr[getRandomValue(0, exArr.length - 1)];
