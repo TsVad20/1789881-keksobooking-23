@@ -1,3 +1,13 @@
+//переменные для свойств 'offer'
+const TYPES_OF_PROPERTY = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const TIMES_OF_CHECKIN = ['12:00', '13:00', '14:00'];
+const TIMES_OF_CHECKOUT = ['12:00', '13:00', '14:00'];
+const LIST_OF_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+const LIST_OF_PHOTOS = [
+  'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+];
 // В файле main.js напишите несколько вспомогательных функций, которые пригодятся вам в следующих заданиях. Функции не обязательно писать с нуля,
 //можно найти готовые в интернете, разобраться в них и добавить к себе в проект. Только не забудьте указать ссылку на источник!
 
@@ -139,22 +149,14 @@ location, объект — местоположение в виде геогра
     }
   },
 }*/
-//переменные для свойств 'offer'
-const typeOfProperty = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
-const timeOfCheckIn = ['12:00', '13:00', '14:00'];
-const timeOfCheckOut = ['12:00', '13:00', '14:00'];
-const listOfFeatures = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-const listOfPhotos = [
-  'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-  'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
+
 // функция получения случайного значения из переданного массива
 const getRandomItem = function (exArr) {
   return exArr[getRandomValue(0, exArr.length - 1)];
 };
 // функция получения случайного массива из элементов переданного
 const getRandomListItem = function (exArr) {
-  return exArr.slice(0, getRandomValue(0, exArr.length + 1));
+  return exArr.slice(0, getRandomValue(0, exArr.length));
 };
 // функция получения случайных координат для обьекта 'location' и 'offer.address"
 const getRandomLocation = function () {
@@ -164,46 +166,51 @@ const getRandomLocation = function () {
   };
 };
 // присваивание координат переменным, для того, чтобы координаты 'location' и 'offer.address' были одинаковыми
-const randomLocationX = getRandomLocation().lat;
-const randomLocationY = getRandomLocation().lng;
 
-const newAd = function () {
+
+const getNewAd = function () {
+  const randomLocation = getRandomLocation();
   return {
 
     author: {
-      avatar: `img / avatars / user0${getRandomValue(1,8)}.png`,
+      avatar: `img/avatars/user0${getRandomValue(1,8)}.png`,
     },
 
     location: {
-      lat: randomLocationX,
-      lng: randomLocationY,
+      lat: randomLocation.lat,
+      lng: randomLocation.lng,
     },
 
     offer: {
 
       title: 'Образец обьявления', // строка — заголовок предложения. Придумайте самостоятельно.
 
-      address: `${randomLocationX},${randomLocationY}`, //строка — адрес предложения. Для простоты пусть пока составляется из географических координат по маске {{location.x}}, {{location.y}}.
+      address: `${randomLocation.lat}, ${randomLocation.lng}`, //строка — адрес предложения. Для простоты пусть пока составляется из географических координат по маске {{location.x}}, {{location.y}}.
 
       price: getRandomValue(100, 10000), //число — стоимость. Случайное целое положительное число.
 
-      type: getRandomItem(typeOfProperty), //getRandomItem(['palace', 'flat', 'house', 'bungalow', 'hotel']), //строка — одно из пяти фиксированных значений: palace, flat, house, bungalow или hotel.
+      type: getRandomItem(TYPES_OF_PROPERTY), //getRandomItem(['palace', 'flat', 'house', 'bungalow', 'hotel']), //строка — одно из пяти фиксированных значений: palace, flat, house, bungalow или hotel.
 
       rooms: getRandomValue(1, 20), //число — количество комнат. Случайное целое положительное число.
 
       guests: getRandomValue(1, 20), //число — количество гостей, которое можно разместить. Случайное целое положительное число.
 
-      checkin: getRandomItem(timeOfCheckIn), //строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
+      checkin: getRandomItem(TIMES_OF_CHECKIN), //строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
 
-      checkout: getRandomItem(timeOfCheckOut), //, строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
+      checkout: getRandomItem(TIMES_OF_CHECKOUT), //, строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
 
-      features: getRandomListItem(listOfFeatures), //массив строк — массив случайной длины из значений: wifi, dishwasher, parking, washer, elevator, conditioner. Значения не должны повторяться.
+      features: getRandomListItem(LIST_OF_FEATURES), //массив строк — массив случайной длины из значений: wifi, dishwasher, parking, washer, elevator, conditioner. Значения не должны повторяться.
 
       description: 'до моря 100 метров', //строка — описание помещения. Придумайте самостоятельно.
 
-      photos: getRandomListItem(listOfPhotos), //массив случайной длины из значений
+      photos: getRandomListItem(LIST_OF_PHOTOS), //массив случайной длины из значений
 
     },
   };
 };
-newAd();
+getNewAd();
+
+const generateArray = function (quantityOfItems) {
+  let newGeneratedArray = new Array(quantityOfItems);
+  return newGeneratedArray.fill().map((item) => getNewAd());
+};
