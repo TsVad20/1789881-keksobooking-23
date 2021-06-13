@@ -6,7 +6,7 @@ const LIST_OF_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator',
 const LIST_OF_PHOTOS = [
   'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+  'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 // В файле main.js напишите несколько вспомогательных функций, которые пригодятся вам в следующих заданиях. Функции не обязательно писать с нуля,
 //можно найти готовые в интернете, разобраться в них и добавить к себе в проект. Только не забудьте указать ссылку на источник!
@@ -211,6 +211,7 @@ const getNewAd = function () {
 getNewAd();
 
 const generateArray = function (quantityOfItems) {
-  let newGeneratedArray = new Array(quantityOfItems);
-  return newGeneratedArray.fill().map((item) => getNewAd());
+  const newGeneratedArray = new Array(quantityOfItems);
+  return newGeneratedArray.fill().map(() => getNewAd());
 };
+generateArray(10);
