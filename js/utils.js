@@ -6,10 +6,6 @@ import {
   LIST_OF_PHOTOS
 } from './data.js';
 
-export {
-  generateArray
-};
-
 // Функция, возвращающая случайное целое число из переданного диапазона включительно.
 
 const getRandomValue = function (min, max) {
@@ -119,10 +115,11 @@ const getNewAd = function () {
     },
   };
 };
-getNewAd();
+
 //Функция генерации массива из нескольких "обьявлений"
 
-const generateArray = function (quantityOfItems) {
+export const generateArray = function (quantityOfItems) {
   const newGeneratedArray = new Array(quantityOfItems);
   return newGeneratedArray.fill().map(() => getNewAd());
 };
+
