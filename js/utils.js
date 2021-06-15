@@ -64,7 +64,7 @@ const getAvatarImageSrc = function () {
       return item = `img/avatars/user0${item}.png`;
     }
     return `img/avatars/user${item}.png`;
-  })
+  });
   return getRandomItem(newArr);
 };
 

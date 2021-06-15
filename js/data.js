@@ -19,4 +19,4 @@ export {
   TIMES_OF_CHECKOUT,
   LIST_OF_FEATURES,
   LIST_OF_PHOTOS
-}
+};
