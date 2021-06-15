@@ -59,7 +59,7 @@ const getRandomListItem = function (exArr) {
 
 const getAvatarImageSrc = function () {
   const imageAddrValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const newArr = imageAddrValues.map(function (item) {
+  const newArr = imageAddrValues.map((item) => {
     if (item < 10) {
       return item = `img/avatars/user0${item}.png`;
     }
