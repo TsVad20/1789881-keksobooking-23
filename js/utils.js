@@ -1,7 +1,15 @@
-import './data.js';
+import {
+  TYPES_OF_PROPERTY,
+  TIMES_OF_CHECKIN,
+  TIMES_OF_CHECKOUT,
+  LIST_OF_FEATURES,
+  LIST_OF_PHOTOS
+} from './data.js';
+
 export {
-  generateArray,
+  generateArray
 };
+
 // Функция, возвращающая случайное целое число из переданного диапазона включительно.
 
 const getRandomValue = function (min, max) {
@@ -111,7 +119,7 @@ const getNewAd = function () {
     },
   };
 };
-
+getNewAd();
 //Функция генерации массива из нескольких "обьявлений"
 
 const generateArray = function (quantityOfItems) {

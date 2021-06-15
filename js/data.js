@@ -12,3 +12,11 @@ const LIST_OF_PHOTOS = [
   'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https: //assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
+
+export {
+  TYPES_OF_PROPERTY,
+  TIMES_OF_CHECKIN,
+  TIMES_OF_CHECKOUT,
+  LIST_OF_FEATURES,
+  LIST_OF_PHOTOS
+}
