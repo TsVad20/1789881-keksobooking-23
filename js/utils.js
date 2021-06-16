@@ -25,7 +25,6 @@ const getRandomValue = function (min, max) {
 const getRandomValueFloat = function (minValue, maxValue, numberOfDigits) {
   minValue = minValue * Math.pow(10, numberOfDigits);
   maxValue = maxValue * Math.pow(10, numberOfDigits);
-  const result;
   if (minValue < 0) {
     minValue = 0;
   }
@@ -35,7 +34,7 @@ const getRandomValueFloat = function (minValue, maxValue, numberOfDigits) {
   if (numberOfDigits < 0) {
     return 'Ошибка! Значение количества разрядов "numberOfDigits" , должно быть положительным.';
   }
-  result = (Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue) * Math.pow(10, -numberOfDigits);
+  const result = (Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue) * Math.pow(10, -numberOfDigits);
   return result.toFixed(numberOfDigits);
 };
 
