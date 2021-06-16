@@ -25,7 +25,7 @@ const getRandomValue = function (min, max) {
 const getRandomValueFloat = function (minValue, maxValue, numberOfDigits) {
   minValue = minValue * Math.pow(10, numberOfDigits);
   maxValue = maxValue * Math.pow(10, numberOfDigits);
-  let result;
+  const result;
   if (minValue < 0) {
     minValue = 0;
   }
