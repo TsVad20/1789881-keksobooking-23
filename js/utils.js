@@ -36,7 +36,7 @@ const getRandomValueFloat = function (minValue, maxValue, numberOfDigits) {
     return 'Ошибка! Значение количества разрядов "numberOfDigits" , должно быть положительным.';
   }
   result = (Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue) * Math.pow(10, -numberOfDigits);
-  return result = result.toFixed(numberOfDigits);
+  return result.toFixed(numberOfDigits);
 };
 
 // функция получения случайного значения из переданного массива
@@ -57,7 +57,7 @@ const getAvatarImageSrc = function () {
   const imageAddrValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const newArr = imageAddrValues.map((item) => {
     if (item < 10) {
-      return item = `img/avatars/user0${item}.png`;
+      return `img/avatars/user0${item}.png`;
     }
     return `img/avatars/user${item}.png`;
   });
@@ -120,6 +120,5 @@ const getNewAd = function () {
 
 export const generateArray = function (quantityOfItems) {
   const newGeneratedArray = new Array(quantityOfItems);
-  return newGeneratedArray.fill().map(() => getNewAd());
+  return newGeneratedArray.fill(null).map(() => getNewAd());
 };
-
