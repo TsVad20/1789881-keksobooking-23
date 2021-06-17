@@ -31,13 +31,13 @@ newAdList.forEach((item) => {
   const newAdItemPhotosList = newAdItem.querySelector('.popup__photos');
   const newAdPhotoTemplate = newAdItemPhotosList.querySelector('.popup__photo');
 
-  for (let item = 0; item < offer.photos.length - 1; item++) {
+  for (let itemOfPhotos = 0; itemOfPhotos < offer.photos.length - 1; itemOfPhotos++) {
     const newAdPhoto = newAdPhotoTemplate.cloneNode(true);
     newAdItemPhotosList.appendChild(newAdPhoto);
   }
   const photoBlock = newAdItemPhotosList.children;
-  for (let item = 0; item < photoBlock.length; item++) {
-    photoBlock[item].src = offer.photos[item];
+  for (let itemOfPhotoBlock = 0; itemOfPhotoBlock < photoBlock.length; itemOfPhotoBlock++) {
+    photoBlock[itemOfPhotoBlock].src = offer.photos[itemOfPhotoBlock];
   }
 
   newAdItem.querySelector('.popup__avatar').src = author.avatar;
