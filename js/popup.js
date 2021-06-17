@@ -10,15 +10,15 @@ const newAdList = generateArrayOfAds(1);
 newAdList.forEach((item) => {
   const {
     author,
-    offer
+    offer,
   } = item;
 
   const newAdItem = adListItemTemplate.cloneNode(true);
 
-  if (offer.title) {
-    newAdItem.querySelector('.popup__title').textContent = offer.title;
+  if (!offer.title) {
+    newAdItem.querySelector('.popup__title').classList.add('hidden');
   }
-  newAdItem.querySelector('.popup__title').classList.add('hidden');
+  newAdItem.querySelector('.popup__title').textContent = offer.title;
 
   newAdItem.querySelector('.popup__text--address').textContent = offer.address;
   newAdItem.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
@@ -31,14 +31,14 @@ newAdList.forEach((item) => {
   const newAdItemPhotosList = newAdItem.querySelector('.popup__photos');
   const newAdPhotoTemplate = newAdItemPhotosList.querySelector('.popup__photo');
 
-  for (let i = 0; i < offer.photos.length - 1; i++) {
+  for (let item = 0; item < offer.photos.length - 1; item++) {
     const newAdPhoto = newAdPhotoTemplate.cloneNode(true);
     newAdItemPhotosList.appendChild(newAdPhoto);
-  };
+  }
   const photoBlock = newAdItemPhotosList.children;
-  for (let i = 0; i < photoBlock.length; i++) {
-    photoBlock[i].src = offer.photos[i];
-  };
+  for (let item = 0; item < photoBlock.length; item++) {
+    photoBlock[item].src = offer.photos[item];
+  }
 
   newAdItem.querySelector('.popup__avatar').src = author.avatar;
 
