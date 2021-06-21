@@ -1,5 +1,5 @@
 import {
-  generateArrayOfAds,
+  generateArrayOfAds
 } from './utils.js';
 
 import {
@@ -55,10 +55,10 @@ const getNewAdList = function (item) {
     newAdItem.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   }
 
-  let popupFeaturesList = newAdItem.querySelector('.popup__features');
+  const popupFeaturesList = newAdItem.querySelector('.popup__features');
   popupFeaturesList.replaceChildren();
   for (let feature = 0; feature < offer.features.length; feature++) {
-    let newListItem = document.createElement('li');
+    const newListItem = document.createElement('li');
     if (!offer.features[feature]) {
       newListItem.classList.add('hidden');
     } else {
@@ -66,7 +66,7 @@ const getNewAdList = function (item) {
       newListItem.classList.add(`popup__feature--${offer.features[feature]}`);
       popupFeaturesList.appendChild(newListItem);
     }
-  };
+  }
 
   newAdItem.querySelector('.popup__description').textContent = offer.description;
   const newAdPhotoList = newAdItem.querySelector('.popup__photos');
@@ -88,7 +88,7 @@ const getNewAdList = function (item) {
       nextAdPhoto.alt = offer.photos[itemOfPhotos + 1];
       newAdPhotoList.appendChild(nextAdPhoto);
     }
-  };
+  }
   if (!author.avatar) {
     newAdItem.querySelector('.popup__avatar').classList.add('hidden');
   } else {
