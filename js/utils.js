@@ -121,20 +121,3 @@ export const generateArrayOfAds = function (quantityOfItems) {
   const newGeneratedArray = new Array(quantityOfItems);
   return newGeneratedArray.fill(null).map(() => getNewAd());
 };
-
-//Функция переименования типа обьекта недвижимости
-
-export const renameTypeOfProperty = function (type) {
-  switch (type) {
-    case 'flat':
-      return 'Квартира';
-    case 'bungalow':
-      return 'Бунгало';
-    case 'house':
-      return 'Дом';
-    case 'palace':
-      return 'Дворец';
-    case 'hotel':
-      return 'Отель';
-  }
-};

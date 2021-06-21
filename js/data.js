@@ -20,3 +20,11 @@ export {
   LIST_OF_FEATURES,
   LIST_OF_PHOTOS
 };
+
+export const renameTypeOfProperty = {
+  'flat': 'Квартира',
+  'bungalow': 'Бунгало',
+  'house': 'Дом',
+  'palace': 'Дворец',
+  'hotel': 'Отель',
+};
