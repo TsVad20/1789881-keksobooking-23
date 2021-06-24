@@ -40,9 +40,9 @@ const getNewAdList = function (item) {
   (!offer.description) ? popupDescription.classList.add('hidden'): popupDescription.textContent = offer.description;
 
   const newFeaturesArray = [];
-  for (const feature = 0; feature < offer.features.length; feature++) {
+  for (let feature = 0; feature < offer.features.length; feature++) {
     if (!offer.features[feature]) {
-      newListItem.classList.add('hidden');
+      popupFeaturesList[feature].classList.add('hidden');
     } else {
       for (const popupFeaturesItem of popupFeaturesList) {
         if (popupFeaturesItem.className === `popup__feature popup__feature--${offer.features[feature]}`) {
