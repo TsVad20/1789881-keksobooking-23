@@ -53,7 +53,7 @@ const getNewAdList = function (item) {
       }
     }
   }
-  newFeaturesArray.forEach(function(feature) {
+  newFeaturesArray.forEach((feature) => {
     popupFeaturesBlock.appendChild(feature);
   });
 
