@@ -7,8 +7,23 @@ import {
 } from './data.js';
 
 const adList = document.querySelector('.map__canvas');
-const adListItemTemplate = document.querySelector('#card').content;
 const newAdList = generateArrayOfAds(10);
+const adListItemTemplate = document.querySelector('#card').content;
+const newAdItem = adListItemTemplate.cloneNode(true);
+const popupTitle = newAdItem.querySelector('.popup__title');
+const popupTextAddress = newAdItem.querySelector('.popup__text--address');
+const popupTextPrice = newAdItem.querySelector('.popup__text--price');
+const popupType = newAdItem.querySelector('.popup__type');
+const popupTextCapacity = newAdItem.querySelector('.popup__text--capacity');
+const popupTextTime = newAdItem.querySelector('.popup__text--time');
+const popupFeaturesList = newAdItem.querySelectorAll('.popup__features>li');
+const popupFeaturesBlock = newAdItem.querySelector('.popup__features');
+const popupDescription = newAdItem.querySelector('.popup__description');
+const newAdPhotoBlock = newAdItem.querySelector('.popup__photos');
+const newAdPhotoList = newAdPhotoBlock.children;
+const AdPhoto = newAdItem.querySelector('.popup__photo');
+//const newAdPhoto = AdPhoto.cloneNode(true);
+const popupAvatar = newAdItem.querySelector('.popup__avatar');
 
 const getNewAdList = function (item) {
 
@@ -17,83 +32,50 @@ const getNewAdList = function (item) {
     offer,
   } = item;
 
-  const newAdItem = adListItemTemplate.cloneNode(true);
+  (!offer.title) ? popupTitle.classList.add('hidden'): popupTitle.textContent = offer.title;
+  (!offer.address) ? popupTextAddress.classList.add('hidden'): popupTextAddress.textContent = offer.address;
+  (!offer.price) ? popupTextPrice.classList.add('hidden'): popupTextPrice.textContent = `${offer.price} ₽/ночь`;
+  (!offer.type) ? popupType.classList.add('hidden'): popupType.textContent = renameTypeOfProperty[offer.type];
+  (!offer.rooms || !offer.guests) ? popupTextCapacity.classList.add('hidden'): popupTextCapacity.textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
+  (!offer.checkin || !offer.checkout) ? popupTextTime.classList.add('hidden'): popupTextTime.textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
+  (!offer.description) ? popupDescription.classList.add('hidden'): popupDescription.textContent = offer.description;
 
-  if (!offer.title) {
-    newAdItem.querySelector('.popup__title').classList.add('hidden');
-  } else {
-    newAdItem.querySelector('.popup__title').textContent = offer.title;
-  }
-
-  if (!offer.address) {
-    newAdItem.querySelector('.popup__title').classList.add('hidden');
-  } else {
-    newAdItem.querySelector('.popup__text--address').textContent = offer.address;
-  }
-
-  if (!offer.price) {
-    newAdItem.querySelector('.popup__text--price').classList.add('hidden');
-  } else {
-    newAdItem.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
-  }
-
-  if (!offer.type) {
-    newAdItem.querySelector('.popup__type').classList.add('hidden');
-  } else {
-    newAdItem.querySelector('.popup__type').textContent = renameTypeOfProperty[offer.type];
-  }
-
-  if (!offer.rooms || !offer.guests) {
-    newAdItem.querySelector('.popup__text--capacity').classList.add('hidden');
-  } else {
-    newAdItem.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
-  }
-
-  if (!offer.checkin || !offer.checkout) {
-    newAdItem.querySelector('.popup__text--time').classList.add('hidden');
-  } else {
-    newAdItem.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
-  }
-
-  const popupFeaturesList = newAdItem.querySelector('.popup__features');
-  popupFeaturesList.replaceChildren();
+  let newFeaturesArray = [];
   for (let feature = 0; feature < offer.features.length; feature++) {
-    const newListItem = document.createElement('li');
     if (!offer.features[feature]) {
       newListItem.classList.add('hidden');
     } else {
-      newListItem.classList.add('popup__feature');
-      newListItem.classList.add(`popup__feature--${offer.features[feature]}`);
-      popupFeaturesList.appendChild(newListItem);
+      for (let popupFeaturesItem of popupFeaturesList) {
+        if (popupFeaturesItem.className === `popup__feature popup__feature--${offer.features[feature]}`) {
+          newFeaturesArray.push(popupFeaturesItem);
+        } else {
+          popupFeaturesItem.remove();
+        }
+      }
     }
   }
+  newFeaturesArray.forEach(feature => {
+    popupFeaturesBlock.appendChild(feature);
+  });
 
-  newAdItem.querySelector('.popup__description').textContent = offer.description;
-  const newAdPhotoList = newAdItem.querySelector('.popup__photos');
-
-  const newAdPhoto = newAdItem.querySelector('.popup__photo');
-  if (!offer.photos[0]) {
-    newAdPhoto.classList.add('hidden');
+  if (offer.photos === []) {
+    newAdPhotoBlock.classList.add('hidden');
   } else {
-    newAdPhoto.src = offer.photos[0];
-    newAdPhoto.alt = offer.photos[0];
-  }
+    for (let photo = 0; photo < offer.photos.length - 1; photo++) {
+      const newAdPhoto = AdPhoto.cloneNode(true);
+      newAdPhotoBlock.appendChild(newAdPhoto);
+    }
 
-  for (let itemOfPhotos = 0; itemOfPhotos < offer.photos.length - 1; itemOfPhotos++) {
-    const nextAdPhoto = newAdPhoto.cloneNode(true);
-    if (!offer.photos[itemOfPhotos + 1]) {
-      newAdPhoto.classList.add('hidden');
-    } else {
-      nextAdPhoto.src = offer.photos[itemOfPhotos + 1];
-      nextAdPhoto.alt = offer.photos[itemOfPhotos + 1];
-      newAdPhotoList.appendChild(nextAdPhoto);
+    for (let photo = 0; photo < newAdPhotoList.length; photo++) {
+      newAdPhotoList[photo].src = offer.photos[photo];
     }
   }
+
   if (!author.avatar) {
-    newAdItem.querySelector('.popup__avatar').classList.add('hidden');
+    popupAvatar.classList.add('hidden');
   } else {
-    newAdItem.querySelector('.popup__avatar').src = author.avatar;
-    newAdItem.querySelector('.popup__avatar').alt = author.avatar;
+    popupAvatar.src = author.avatar;
+    popupAvatar.alt = 'avatar пользователя';
   }
 
   adList.appendChild(newAdItem);
