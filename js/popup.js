@@ -22,7 +22,6 @@ const popupDescription = newAdItem.querySelector('.popup__description');
 const newAdPhotoBlock = newAdItem.querySelector('.popup__photos');
 const newAdPhotoList = newAdPhotoBlock.children;
 const AdPhoto = newAdItem.querySelector('.popup__photo');
-//const newAdPhoto = AdPhoto.cloneNode(true);
 const popupAvatar = newAdItem.querySelector('.popup__avatar');
 
 const getNewAdList = function (item) {
@@ -40,12 +39,12 @@ const getNewAdList = function (item) {
   (!offer.checkin || !offer.checkout) ? popupTextTime.classList.add('hidden'): popupTextTime.textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   (!offer.description) ? popupDescription.classList.add('hidden'): popupDescription.textContent = offer.description;
 
-  let newFeaturesArray = [];
-  for (let feature = 0; feature < offer.features.length; feature++) {
+  const newFeaturesArray = [];
+  for (const feature = 0; feature < offer.features.length; feature++) {
     if (!offer.features[feature]) {
       newListItem.classList.add('hidden');
     } else {
-      for (let popupFeaturesItem of popupFeaturesList) {
+      for (const popupFeaturesItem of popupFeaturesList) {
         if (popupFeaturesItem.className === `popup__feature popup__feature--${offer.features[feature]}`) {
           newFeaturesArray.push(popupFeaturesItem);
         } else {
