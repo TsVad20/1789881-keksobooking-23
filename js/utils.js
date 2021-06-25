@@ -47,7 +47,7 @@ const getRandomItem = function (exArr) {
 // функция получения случайного массива из элементов переданного
 
 const getRandomListItem = function (exArr) {
-  return exArr.slice(0, getRandomValue(0, exArr.length));
+  return exArr.slice(0, getRandomValue(1, exArr.length));
 };
 
 //функция генерации адреса изображения
@@ -117,7 +117,7 @@ const getNewAd = function () {
 
 //Функция генерации массива из нескольких "обьявлений"
 
-export const generateArray = function (quantityOfItems) {
+export const generateArrayOfAds = function (quantityOfItems) {
   const newGeneratedArray = new Array(quantityOfItems);
   return newGeneratedArray.fill(null).map(() => getNewAd());
 };

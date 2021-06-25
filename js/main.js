@@ -1,5 +1,6 @@
 import {
-  generateArray
+  generateArrayOfAds
 } from './utils.js';
+import './popup.js';
 
-generateArray(10);
+generateArrayOfAds(10);
