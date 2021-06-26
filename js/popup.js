@@ -16,7 +16,6 @@ const popupFeaturesList = newAdItem.querySelector('.popup__features');
 const featureListElements = popupFeaturesList.querySelectorAll('.popup__feature');
 const popupDescription = newAdItem.querySelector('.popup__description');
 const newAdPhotoBlock = newAdItem.querySelector('.popup__photos');
-const newAdPhotoList = newAdPhotoBlock.children;
 const AdPhoto = newAdItem.querySelector('.popup__photo');
 const popupAvatar = newAdItem.querySelector('.popup__avatar');
 
@@ -43,7 +42,7 @@ const getNewAdList = function (item) {
       if(!modifiers.includes(modifier)){
         dataFeatureItem.remove();
       }
-    }
+    };
   }
 
   if (offer.photos === []) {
