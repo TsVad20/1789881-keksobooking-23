@@ -31,7 +31,7 @@ const getNewAdList = function (item) {
   (!offer.checkin || !offer.checkout) ? popupTextTime.classList.add('hidden'): popupTextTime.textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   (!offer.description) ? popupDescription.classList.add('hidden'): popupDescription.textContent = offer.description;
 
-  const modifiers = offer.features.map((feature)=>{`popup__feature--${feature}`});
+  const modifiers = offer.features.map((feature)=>{`popup__feature--${feature}`;});
 
   if (!offer.features) {
     popupFeaturesList.classList.add('hidden');
@@ -42,7 +42,7 @@ const getNewAdList = function (item) {
       if(!modifiers.includes(modifier)){
         dataFeatureItem.remove();
       }
-    };
+    }
   }
 
   if (offer.photos === []) {
