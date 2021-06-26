@@ -1,10 +1,6 @@
-import {
-  generateArrayOfAds
-} from './utils.js';
+import {generateArrayOfAds} from './utils.js';
 
-import {
-  renameTypeOfProperty
-} from './data.js';
+import {renameTypeOfProperty} from './data.js';
 
 const adList = document.querySelector('.map__canvas');
 const newAdList = generateArrayOfAds(10);
@@ -26,10 +22,7 @@ const popupAvatar = newAdItem.querySelector('.popup__avatar');
 
 const getNewAdList = function (item) {
 
-  const {
-    author,
-    offer,
-  } = item;
+  const {author,offer} = item;
 
   (!offer.title) ? popupTitle.classList.add('hidden'): popupTitle.textContent = offer.title;
   (!offer.address) ? popupTextAddress.classList.add('hidden'): popupTextAddress.textContent = offer.address;
