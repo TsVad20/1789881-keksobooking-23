@@ -8,13 +8,13 @@ export const activePage = function () {
   adForm.classList.remove('ad-form--disabled');
 
   adFormElements.forEach((element) => {
-    element.setAttribute('disabled', false);
+    element.disabled = false;
   });
 
   mapFiltersForm.classList.remove('ad-form--disabled');
 
   mapFiltersFormElements.forEach((element) => {
-    element.setAttribute('disabled', false);
+    element.disabled = false;
   });
 
 };
@@ -23,13 +23,13 @@ export const unactivePage = function () {
   adForm.classList.add('ad-form--disabled');
 
   adFormElements.forEach((element) => {
-    element.setAttribute('disabled', true);
+    element.disabled = true;
   });
 
   mapFiltersForm.classList.add('ad-form--disabled');
 
   mapFiltersFormElements.forEach((element) => {
-    element.setAttribute('disabled', true);
+    element.disabled = true;
   });
 
 };
