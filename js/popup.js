@@ -62,7 +62,6 @@ const getNewAdList = function (item) {
     popupAvatar.src = author.avatar;
     popupAvatar.alt = 'avatar пользователя';
   }
-
   adList.appendChild(newAdItem);
 };
 getNewAdList(newAdList[0]);
