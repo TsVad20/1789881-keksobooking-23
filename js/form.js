@@ -1,4 +1,4 @@
-import {minPriceOfPropertyType} from "./data";
+import {minPriceOfPropertyType} from './data';
 
 const adForm = document.querySelector('.ad-form');
 const mapFiltersForm = document.querySelector('.map__filters');
@@ -65,7 +65,8 @@ titleInput.addEventListener('input', () => {
 3.2. Цена за ночь:
 Обязательное поле;
 Числовое поле;
-Максимальное значение — 1 000 000.*/
+Максимальное значение — 1 000 000.
+*/
 
 priceInput.addEventListener('input', () => {
 
@@ -84,7 +85,8 @@ priceInput.addEventListener('input', () => {
 «Квартира» — минимальная цена за ночь 1 000;
 «Отель» — минимальная цена за ночь 3 000;
 «Дом» — минимальная цена 5 000;
-«Дворец» — минимальная цена 10 000. */
+«Дворец» — минимальная цена 10 000.
+*/
 
 typeOfProperty.addEventListener('change', (evt) => {
   evt.target.selected = true;
@@ -113,7 +115,8 @@ timeOut.addEventListener('change', (evt) => {
 1 комната — «для 1 гостя»;
 2 комнаты — «для 2 гостей» или «для 1 гостя»;
 3 комнаты — «для 3 гостей», «для 2 гостей» или «для 1 гостя»;
-100 комнат — «не для гостей». */
+100 комнат — «не для гостей».
+*/
 
 const switchGuestsCapacity = (rooms) => {
 
