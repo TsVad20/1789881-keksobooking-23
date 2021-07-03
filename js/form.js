@@ -1,5 +1,3 @@
-import {minPriceOfPropertyType} from './data';
-
 const adForm = document.querySelector('.ad-form');
 const mapFiltersForm = document.querySelector('.map__filters');
 const adFormElements = adForm.querySelectorAll('.ad-form>fieldset');
@@ -10,7 +8,14 @@ const typeOfProperty = adForm.querySelector('#type');
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
 const roomNumberSelect = adForm.querySelector('#room_number');
-const capacitySelect = adForm.querySelector('#capacity');
+const capacityOptions = capacitySelect.querySelectorAll('option');
+const minPriceOfPropertyType = {
+  'bungalow': '0',
+  'flat': '1000',
+  'hotel': '3000',
+  'house': '5000',
+  'palace': '10000',
+};
 
 export const activePage = function () {
 
@@ -68,6 +73,8 @@ priceInput.addEventListener('input', () => {
 
   if (priceInput.value > priceInput.max) {
     priceInput.setCustomValidity(`Цена не должна превышать ${priceInput.max}.`);
+  } else if (priceInput.value < priceInput.min) {
+    priceInput.setCustomValidity(`Цена не должна быть меньше ${priceInput.min}.`);
   } else {
     priceInput.setCustomValidity('');
   }
@@ -83,7 +90,6 @@ priceInput.addEventListener('input', () => {
 «Дворец» — минимальная цена 10 000.*/
 
 typeOfProperty.addEventListener('change', (evt) => {
-  evt.target.selected = true;
   priceInput.min = `${minPriceOfPropertyType[evt.target.value]}`;
   priceInput.placeholder = `${minPriceOfPropertyType[evt.target.value]}`;
 });
@@ -97,7 +103,6 @@ timeIn.addEventListener('change', (evt) => {
   timeOut.value = evt.target.value;
 });
 timeOut.addEventListener('change', (evt) => {
-  evt.target.selected = true;
   timeIn.value = evt.target.value;
 });
 
@@ -108,39 +113,31 @@ timeOut.addEventListener('change', (evt) => {
 3 комнаты — «для 3 гостей», «для 2 гостей» или «для 1 гостя»;
 100 комнат — «не для гостей».*/
 
+/*создать объект где ключ это количество гостей а значение массив доступных вариантов
+
+{
+  1: ['1'],
+  2: ['1', '2'],
+  ...
+}
+и в цикле проверять "если значение содержится (.includes) в массиве по этому ключу, то disabled=false иначе disabled=true*/
+
+const guestsCapacity = {
+  1: ['1'],
+  2: ['1', '2'],
+  3: ['1', '2', '3'],
+  100: ['0'],
+};
+
 const switchGuestsCapacity = (rooms) => {
-
-  switch (rooms) {
-
-    case '1':
-      capacitySelect.options[0].disabled = true;
-      capacitySelect.options[1].disabled = true;
-      capacitySelect.options[2].selected = true;
-      capacitySelect.options[2].disabled = false;
-      capacitySelect.options[3].disabled = true;
-      break;
-    case '2':
-      capacitySelect.options[0].disabled = true;
-      capacitySelect.options[1].selected = true;
-      capacitySelect.options[1].disabled = false;
-      capacitySelect.options[2].disabled = false;
-      capacitySelect.options[3].disabled = true;
-      break;
-    case '3':
-      capacitySelect.options[0].selected = true;
-      capacitySelect.options[0].disabled = false;
-      capacitySelect.options[1].disabled = false;
-      capacitySelect.options[2].disabled = false;
-      capacitySelect.options[3].disabled = true;
-      break;
-    case '100':
-      capacitySelect.options[0].disabled = true;
-      capacitySelect.options[1].disabled = true;
-      capacitySelect.options[2].disabled = true;
-      capacitySelect.options[3].selected = true;
-      capacitySelect.options[3].disabled = false;
-      break;
-  }
+  capacityOptions.forEach((item) => {
+    if (guestsCapacity[rooms].includes(`${item.value}`)) {
+      item.disabled = false;
+      console.log(item);
+    } else {
+      item.disabled = true;
+    }
+  });
 };
 
 roomNumberSelect.addEventListener('change', (evt) => {
