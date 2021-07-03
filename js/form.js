@@ -8,6 +8,7 @@ const typeOfProperty = adForm.querySelector('#type');
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
 const roomNumberSelect = adForm.querySelector('#room_number');
+const capacitySelect = adForm.querySelector('#capacity');
 const capacityOptions = capacitySelect.querySelectorAll('option');
 const minPriceOfPropertyType = {
   'bungalow': '0',
@@ -133,7 +134,6 @@ const switchGuestsCapacity = (rooms) => {
   capacityOptions.forEach((item) => {
     if (guestsCapacity[rooms].includes(`${item.value}`)) {
       item.disabled = false;
-      console.log(item);
     } else {
       item.disabled = true;
     }
