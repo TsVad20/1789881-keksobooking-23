@@ -18,6 +18,13 @@ const minPriceOfPropertyType = {
   'palace': '10000',
 };
 
+const guestsCapacity = {
+  1: ['1'],
+  2: ['1', '2'],
+  3: ['1', '2', '3'],
+  100: ['0'],
+};
+
 export const activePage = function () {
 
   adForm.classList.remove('ad-form--disabled');
@@ -100,7 +107,6 @@ typeOfProperty.addEventListener('change', (evt) => {
 Например, если время заезда указано «после 14», то время выезда будет равно «до 14» и наоборот.*/
 
 timeIn.addEventListener('change', (evt) => {
-  evt.target.selected = true;
   timeOut.value = evt.target.value;
 });
 timeOut.addEventListener('change', (evt) => {
@@ -122,22 +128,13 @@ timeOut.addEventListener('change', (evt) => {
 }
 и в цикле проверять "если значение содержится (.includes) в массиве по этому ключу, то disabled=false иначе disabled=true*/
 
-const guestsCapacity = {
-  1: ['1'],
-  2: ['1', '2'],
-  3: ['1', '2', '3'],
-  100: ['0'],
-};
-
 const switchGuestsCapacity = (rooms) => {
   capacityOptions.forEach((item) => {
-    if (guestsCapacity[rooms].includes(`${item.value}`)) {
-      item.disabled = false;
-    } else {
-      item.disabled = true;
-    }
+    item.disabled = !guestsCapacity[rooms].includes(`${item.value}`);
   });
 };
+
+switchGuestsCapacity('1');
 
 roomNumberSelect.addEventListener('change', (evt) => {
   switchGuestsCapacity(evt.target.value);
