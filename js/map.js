@@ -45,7 +45,7 @@ export const getAdMap = function (cb) {
 
   neiborAdCoords.forEach((item) => {
     const marker = L.marker(item.location, {
-      icon: pinIcon
+      icon: pinIcon,
     });
     marker.addTo(map).bindPopup(createPopup(item));
   });
@@ -53,7 +53,7 @@ export const getAdMap = function (cb) {
   mainMarker.on('moveend', (evt) => {
     const {
       lat,
-      lng
+      lng,
     } = evt.target.getLatLng();
     addressInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
   });
