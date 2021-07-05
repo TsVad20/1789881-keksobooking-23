@@ -5,7 +5,7 @@ export const createPopup = (item) => {
   const popupElement = balloonTemplate.cloneNode(true);
   const {
     author,
-    offer
+    offer,
   } = item;
   const popupTitle = popupElement.querySelector('.popup__title');
   const popupTextAddress = popupElement.querySelector('.popup__text--address');
@@ -61,4 +61,4 @@ export const createPopup = (item) => {
     popupAvatar.alt = 'avatar пользователя';
   }
   return popupElement;
-}
+};
