@@ -1,6 +1,7 @@
 const adForm = document.querySelector('.ad-form');
 const mapFiltersForm = document.querySelector('.map__filters');
 const adFormElements = adForm.querySelectorAll('.ad-form>fieldset');
+export const addressInput = adForm.querySelector('#address');
 const mapFiltersFormElements = mapFiltersForm.querySelectorAll('.map__filters>fieldset');
 const titleInput = document.querySelector('#title');
 const priceInput = adForm.querySelector('#price');
@@ -10,6 +11,7 @@ const timeOut = adForm.querySelector('#timeout');
 const roomNumberSelect = adForm.querySelector('#room_number');
 const capacitySelect = adForm.querySelector('#capacity');
 const capacityOptions = capacitySelect.querySelectorAll('option');
+
 const minPriceOfPropertyType = {
   'bungalow': '0',
   'flat': '1000',

@@ -23,3 +23,8 @@ export const renameTypeOfProperty = {
   'palace': 'Дворец',
   'hotel': 'Отель',
 };
+
+export const COORDS_OF_TOKIO = {
+  lat: 35.68950,
+  lng: 139.69171,
+};
