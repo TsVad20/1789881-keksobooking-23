@@ -1,27 +1,24 @@
-import {generateArrayOfAds} from './utils.js';
-
 import {renameTypeOfProperty} from './data.js';
 
-const adList = document.querySelector('.map__canvas');
-const newAdList = generateArrayOfAds(10);
-const adListItemTemplate = document.querySelector('#card').content;
-const newAdItem = adListItemTemplate.cloneNode(true);
-const popupTitle = newAdItem.querySelector('.popup__title');
-const popupTextAddress = newAdItem.querySelector('.popup__text--address');
-const popupTextPrice = newAdItem.querySelector('.popup__text--price');
-const popupType = newAdItem.querySelector('.popup__type');
-const popupTextCapacity = newAdItem.querySelector('.popup__text--capacity');
-const popupTextTime = newAdItem.querySelector('.popup__text--time');
-const popupFeaturesList = newAdItem.querySelector('.popup__features');
-const featureListElements = popupFeaturesList.querySelectorAll('.popup__feature');
-const popupDescription = newAdItem.querySelector('.popup__description');
-const newAdPhotoBlock = newAdItem.querySelector('.popup__photos');
-const AdPhoto = newAdItem.querySelector('.popup__photo');
-const popupAvatar = newAdItem.querySelector('.popup__avatar');
-
-const getNewAdList = function (item) {
-
-  const {author, offer} = item;
+export const createPopup = (item) => {
+  const balloonTemplate = document.querySelector('#card').content.querySelector('.popup');
+  const popupElement = balloonTemplate.cloneNode(true);
+  const {
+    author,
+    offer
+  } = item;
+  const popupTitle = popupElement.querySelector('.popup__title');
+  const popupTextAddress = popupElement.querySelector('.popup__text--address');
+  const popupTextPrice = popupElement.querySelector('.popup__text--price');
+  const popupType = popupElement.querySelector('.popup__type');
+  const popupTextCapacity = popupElement.querySelector('.popup__text--capacity');
+  const popupTextTime = popupElement.querySelector('.popup__text--time');
+  const popupFeaturesList = popupElement.querySelector('.popup__features');
+  const featureListElements = popupFeaturesList.querySelectorAll('.popup__feature');
+  const popupDescription = popupElement.querySelector('.popup__description');
+  const newAdPhotoBlock = popupElement.querySelector('.popup__photos');
+  const AdPhoto = popupElement.querySelector('.popup__photo');
+  const popupAvatar = popupElement.querySelector('.popup__avatar');
 
   (!offer.title) ? popupTitle.classList.add('hidden'): popupTitle.textContent = offer.title;
   (!offer.address) ? popupTextAddress.classList.add('hidden'): popupTextAddress.textContent = offer.address;
@@ -31,15 +28,16 @@ const getNewAdList = function (item) {
   (!offer.checkin || !offer.checkout) ? popupTextTime.classList.add('hidden'): popupTextTime.textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   (!offer.description) ? popupDescription.classList.add('hidden'): popupDescription.textContent = offer.description;
 
-  const modifiers = offer.features.map((feature)=>{`popup__feature--${feature}`;});
+  const modifiers = offer.features.map((feature) => {
+    `popup__feature--${feature}`;
+  });
 
   if (!offer.features) {
     popupFeaturesList.classList.add('hidden');
-  }
-  else {
-    for (const dataFeatureItem of featureListElements){
+  } else {
+    for (const dataFeatureItem of featureListElements) {
       const modifier = dataFeatureItem.classList[1];
-      if(!modifiers.includes(modifier)){
+      if (!modifiers.includes(modifier)) {
         dataFeatureItem.remove();
       }
     }
@@ -62,6 +60,5 @@ const getNewAdList = function (item) {
     popupAvatar.src = author.avatar;
     popupAvatar.alt = 'avatar пользователя';
   }
-  adList.appendChild(newAdItem);
-};
-getNewAdList(newAdList[0]);
+  return popupElement;
+}
