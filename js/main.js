@@ -1,6 +1,6 @@
-import {generateArrayOfAds} from './utils.js';
 import './popup.js';
-import {activePage} from './form.js';
+import {activePage, unactivePage} from './form.js';
+import {getAdMap} from './map.js';
 
-generateArrayOfAds(10);
-activePage();
+unactivePage();
+getAdMap(activePage);
