@@ -8,13 +8,9 @@ const priceInput = adForm.querySelector('#price');
 const typeOfProperty = adForm.querySelector('#type');
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
-
 const capacitySelect = adForm.querySelector('#capacity');
 const capacityOptions = capacitySelect.querySelectorAll('option');
-<<<<<<< HEAD
-=======
 const roomNumberSelect = adForm.querySelector('#room_number');
->>>>>>> 3e874ed62e6a08eb7b7a088d5636f943a65b2f2e
 
 const minPriceOfPropertyType = {
   'bungalow': '0',

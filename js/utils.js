@@ -114,10 +114,3 @@ const getNewAd = function () {
     },
   };
 };
-
-//Функция генерации массива из нескольких "обьявлений"
-
-export const generateArrayOfAds = function (quantityOfItems) {
-  const newGeneratedArray = new Array(quantityOfItems);
-  return newGeneratedArray.fill(null).map(() => getNewAd());
-};

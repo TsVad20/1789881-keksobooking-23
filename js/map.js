@@ -1,7 +1,8 @@
-import {generateArrayOfAds} from './utils.js';
+//import {getArrayOfAds} from './utils.js';
 import {COORDS_OF_TOKIO} from './data.js';
 import {addressInput} from './form.js';
 import {createPopup} from './popup.js';
+import { createFetch } from './create-fetch.js';
 
 const adMap = 'map-canvas';
 
@@ -23,7 +24,7 @@ const mainMarker = L.marker(
     icon: mainPinIcon,
   },
 );
-const neiborAdCoords = generateArrayOfAds(10);
+//const neiborAdCoords = getArrayOfAds;
 
 export const getAdMap = function (cb) {
 
@@ -43,12 +44,11 @@ export const getAdMap = function (cb) {
 
   addressInput.value = `${COORDS_OF_TOKIO.lat.toFixed(5)}, ${COORDS_OF_TOKIO.lng.toFixed(5)}`;
 
-  neiborAdCoords.forEach((item) => {
-    const marker = L.marker(item.location, {
-      icon: pinIcon,
-    });
+  const addPoints = function(data) {data.forEach(item=>{
+    const marker = L.marker(item.location, {icon: pinIcon,});
     marker.addTo(map).bindPopup(createPopup(item));
-  });
+  })};
+  createFetch(addPoints);
 
   mainMarker.on('moveend', (evt) => {
     const {
