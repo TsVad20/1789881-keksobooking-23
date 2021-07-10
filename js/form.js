@@ -3,7 +3,7 @@ const mapFiltersForm = document.querySelector('.map__filters');
 const adFormElements = adForm.querySelectorAll('.ad-form>fieldset');
 export const addressInput = adForm.querySelector('#address');
 const mapFiltersFormElements = mapFiltersForm.querySelectorAll('.map__filters>fieldset');
-const titleInput = document.querySelector('#title');
+export const titleInput = document.querySelector('#title');
 const priceInput = adForm.querySelector('#price');
 const typeOfProperty = adForm.querySelector('#type');
 const timeIn = adForm.querySelector('#timein');
@@ -141,3 +141,19 @@ switchGuestsCapacity('1');
 roomNumberSelect.addEventListener('change', (evt) => {
   switchGuestsCapacity(evt.target.value);
 });
+
+export const setFormSubmit = function(onSuccess, onError) {
+
+adForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  const formData = new FormData(evt.target);
+
+  fetch('https://23.javascript.pages.academy/keksobooking',
+    {
+      method: 'POST',
+      body: formData,
+    },)
+    .then(() => onSuccess())
+    .catch(() => onError());
+  });
+};

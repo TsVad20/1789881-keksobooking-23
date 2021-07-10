@@ -28,13 +28,15 @@ export const createPopup = (item) => {
   (!offer.checkin || !offer.checkout) ? popupTextTime.classList.add('hidden'): popupTextTime.textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   (!offer.description) ? popupDescription.classList.add('hidden'): popupDescription.textContent = offer.description;
 
-  const modifiers = offer.features.map((feature) => {
-    `popup__feature--${feature}`;
-  });
-
   if (!offer.features) {
     popupFeaturesList.classList.add('hidden');
   } else {
+
+    const modifiers = offer.features.map((feature) => {
+      `popup__feature--${feature}`;
+
+    });
+
     for (const dataFeatureItem of featureListElements) {
       const modifier = dataFeatureItem.classList[1];
       if (!modifiers.includes(modifier)) {
@@ -43,7 +45,7 @@ export const createPopup = (item) => {
     }
   }
 
-  if (offer.photos === []) {
+  if (!offer.photos || offer.photos === []) {
     newAdPhotoBlock.classList.add('hidden');
   } else {
     for (let photo = 0; photo < offer.photos.length; photo++) {
