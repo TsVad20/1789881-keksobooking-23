@@ -170,32 +170,35 @@ adForm.addEventListener('submit', (evt) => {
       if(response.ok){
       onSuccess();
     }
+      throw new Error(`${response.status} ${response.statusText}`);
   })
     .then(()=>getSuccessPopupMessage())
     .catch(() => onError());
   });
 };
-
-adForm.addEventListener('reset',(evt)=>{
-evt.preventDefault();
-setDefaultMapParameters();
-})
-
-export const setDefaultMapParameters = function () {
+const setDefaultPriceValue = function () {
+  typeOfPropertyOptions.forEach((item) => {
+    if (item.selected) {
+      priceInput.min = '1000';
+      priceInput.placeholder = '1000';
+    }
+  });
+};
+const setDefaultMapParameters = function(){
   mainMarker.setLatLng(COORDS_OF_TOKIO);
-  adForm.reset();
   addressInput.value = `${COORDS_OF_TOKIO.lat.toFixed(5)}, ${COORDS_OF_TOKIO.lng.toFixed(5)}`;
+};
+
+export const setDefaultFormParameters = function () {
+  adForm.reset();
+  setDefaultMapParameters();
   titleInput.value = '';
   roomNumberSelect.options[0].selected = true;
   setDefaultPriceValue();
   switchGuestsCapacity('1');
 };
 
-const setDefaultPriceValue = function(){
-  typeOfPropertyOptions.forEach((item)=>{
-if (item.selected){
-  priceInput.min = `${minPriceOfPropertyType[item.value]}`;
-  priceInput.placeholder = `${minPriceOfPropertyType[item.value]}`;
-}
-  });
-};
+adForm.addEventListener('reset', (evt) => {
+  evt.preventDefault();
+  setDefaultFormParameters();
+});
