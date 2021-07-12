@@ -1,21 +1,22 @@
-import { resetForm, setDefaultMapParameters } from "./map";
-
+import { COORDS_OF_TOKIO } from './data.js';
+import { getSuccessPopupMessage } from './form-submit-messages.js';
+import { mainMarker } from './map.js';
 export const adForm = document.querySelector('.ad-form');
-const adFormResetButton = adForm.querySelector('.ad-form__reset');
 const mapFiltersForm = document.querySelector('.map__filters');
 const adFormElements = adForm.querySelectorAll('.ad-form>fieldset');
 export const addressInput = adForm.querySelector('#address');
 const mapFiltersFormElements = mapFiltersForm.querySelectorAll('.map__filters>fieldset');
 export const titleInput = document.querySelector('#title');
-const priceInput = adForm.querySelector('#price');
-const typeOfProperty = adForm.querySelector('#type');
+export const priceInput = adForm.querySelector('#price');
+export const typeOfProperty = adForm.querySelector('#type');
+const typeOfPropertyOptions = typeOfProperty.querySelectorAll('option');
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
 const capacitySelect = adForm.querySelector('#capacity');
 const capacityOptions = capacitySelect.querySelectorAll('option');
-const roomNumberSelect = adForm.querySelector('#room_number');
+export const roomNumberSelect = adForm.querySelector('#room_number');
 
-const minPriceOfPropertyType = {
+export const minPriceOfPropertyType = {
   'bungalow': '0',
   'flat': '1000',
   'hotel': '3000',
@@ -137,7 +138,6 @@ const setGuestCapacity = (rooms) => {
   capacityOptions.forEach((item) => {
     if (item.value === guestsCapacity[rooms][0]) {
       item.selected = true;
-      console.log(item);
     }
   })
 };
@@ -166,7 +166,36 @@ adForm.addEventListener('submit', (evt) => {
       method: 'POST',
       body: formData,
     },)
-    .then(() => onSuccess())
+    .then((response) => {
+      if(response.ok){
+      onSuccess();
+    }
+  })
+    .then(()=>getSuccessPopupMessage())
     .catch(() => onError());
+  });
+};
+
+adForm.addEventListener('reset',(evt)=>{
+evt.preventDefault();
+setDefaultMapParameters();
+})
+
+export const setDefaultMapParameters = function () {
+  mainMarker.setLatLng(COORDS_OF_TOKIO);
+  adForm.reset();
+  addressInput.value = `${COORDS_OF_TOKIO.lat.toFixed(5)}, ${COORDS_OF_TOKIO.lng.toFixed(5)}`;
+  titleInput.value = '';
+  roomNumberSelect.options[0].selected = true;
+  setDefaultPriceValue();
+  switchGuestsCapacity('1');
+};
+
+const setDefaultPriceValue = function(){
+  typeOfPropertyOptions.forEach((item)=>{
+if (item.selected){
+  priceInput.min = `${minPriceOfPropertyType[item.value]}`;
+  priceInput.placeholder = `${minPriceOfPropertyType[item.value]}`;
+}
   });
 };

@@ -1,8 +1,8 @@
 import {COORDS_OF_TOKIO} from './data.js';
-import {adForm, addressInput, titleInput, switchGuestsCapacity} from './form.js';
+import {addressInput} from './form.js';
 import {createPopup} from './popup.js';
 import {getData} from './create-fetch.js';
-import { getSuccessPopupMessage } from "./form-submit-messages.js";
+
 const adMap = 'map-canvas';
 
 const map = L.map(adMap);
@@ -19,7 +19,7 @@ const pinIcon = L.icon({
   iconAnchor: [20, 40],
 });
 
-const mainMarker = L.marker(
+export const mainMarker = L.marker(
   COORDS_OF_TOKIO, {
     draggable: true,
     icon: mainPinIcon,
@@ -58,12 +58,4 @@ export const getAdMap = function (cb) {
     } = evt.target.getLatLng();
     addressInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
   });
-};
-export const setDefaultMapParameters = function(){
-  mainMarker.setLatLng(COORDS_OF_TOKIO);
-  adForm.reset();
-  addressInput.value = `${COORDS_OF_TOKIO.lat.toFixed(5)}, ${COORDS_OF_TOKIO.lng.toFixed(5)}`;
-  titleInput.value = '';
-  switchGuestsCapacity('1');
-  getSuccessPopupMessage();
 };
