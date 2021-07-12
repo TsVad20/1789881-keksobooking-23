@@ -1,5 +1,5 @@
 import {COORDS_OF_TOKIO} from './data.js';
-import {addressInput, titleInput} from './form.js';
+import {adForm, addressInput, titleInput, switchGuestsCapacity} from './form.js';
 import {createPopup} from './popup.js';
 import {getData} from './create-fetch.js';
 import { getSuccessPopupMessage } from "./form-submit-messages.js";
@@ -47,7 +47,6 @@ export const getAdMap = function (cb) {
 
   const addPoints = function(data) {data.slice(0,countOfAds).forEach(item=>{
     const marker = L.marker(item.location, {icon: pinIcon,});
-    console.log(createPopup(item));
     marker.addTo(map).bindPopup(createPopup(item));
   })};
   getData(addPoints);
@@ -62,7 +61,9 @@ export const getAdMap = function (cb) {
 };
 export const setDefaultMapParameters = function(){
   mainMarker.setLatLng(COORDS_OF_TOKIO);
+  adForm.reset();
   addressInput.value = `${COORDS_OF_TOKIO.lat.toFixed(5)}, ${COORDS_OF_TOKIO.lng.toFixed(5)}`;
   titleInput.value = '';
+  switchGuestsCapacity('1');
   getSuccessPopupMessage();
 };

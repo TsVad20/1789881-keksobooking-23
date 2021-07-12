@@ -1,4 +1,7 @@
-const adForm = document.querySelector('.ad-form');
+import { resetForm, setDefaultMapParameters } from "./map";
+
+export const adForm = document.querySelector('.ad-form');
+const adFormResetButton = adForm.querySelector('.ad-form__reset');
 const mapFiltersForm = document.querySelector('.map__filters');
 const adFormElements = adForm.querySelectorAll('.ad-form>fieldset');
 export const addressInput = adForm.querySelector('#address');
@@ -81,9 +84,9 @@ titleInput.addEventListener('input', () => {
 
 priceInput.addEventListener('input', () => {
 
-  if (priceInput.value > priceInput.max) {
+  if (+priceInput.value > +priceInput.max) {
     priceInput.setCustomValidity(`Цена не должна превышать ${priceInput.max}.`);
-  } else if (priceInput.value < priceInput.min) {
+  } else if (+priceInput.value < +priceInput.min) {
     priceInput.setCustomValidity(`Цена не должна быть меньше ${priceInput.min}.`);
   } else {
     priceInput.setCustomValidity('');
@@ -130,7 +133,17 @@ timeOut.addEventListener('change', (evt) => {
 }
 и в цикле проверять "если значение содержится (.includes) в массиве по этому ключу, то disabled=false иначе disabled=true*/
 
-const switchGuestsCapacity = (rooms) => {
+const setGuestCapacity = (rooms) => {
+  capacityOptions.forEach((item) => {
+    if (item.value === guestsCapacity[rooms][0]) {
+      item.selected = true;
+      console.log(item);
+    }
+  })
+};
+
+export const switchGuestsCapacity = (rooms) => {
+  setGuestCapacity(rooms);
   capacityOptions.forEach((item) => {
     item.disabled = !guestsCapacity[rooms].includes(`${item.value}`);
   });

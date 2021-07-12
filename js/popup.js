@@ -32,10 +32,8 @@ export const createPopup = (item) => {
     popupFeaturesList.classList.add('hidden');
   } else {
 
-    const modifiers = offer.features.map((feature) => {
-      `popup__feature--${feature}`;
+    const modifiers = offer.features.map((feature) => `popup__feature--${feature}`);
 
-    });
 
     for (const dataFeatureItem of featureListElements) {
       const modifier = dataFeatureItem.classList[1];

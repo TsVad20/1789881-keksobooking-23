@@ -9,7 +9,7 @@ export const getSuccessPopupMessage = function(){
     evt.preventDefault();
     successPopupMessageElement.remove();
     });
-  successPopupMessageElement.addEventListener('keydown', (evt) => {
+  document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape' || evt.key === 'Esc') {
       evt.preventDefault();
       successPopupMessageElement.remove();
@@ -25,7 +25,7 @@ export const getErrorPopupMessage = function () {
     evt.preventDefault();
     errorPopupMessageElement.remove();
   });
-  errorPopupMessageElement.addEventListener('keydown', (evt) => {
+  document.addEventListener('keydown', (evt) => {
     if (evt.target.key === 'Escape' || evt.key === 'Esc') {
       evt.preventDefault();
       errorPopupMessageElement.remove();
