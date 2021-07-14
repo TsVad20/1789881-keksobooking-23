@@ -205,7 +205,6 @@ export const setDefaultFormParameters = function () {
   switchGuestsCapacity('1');
 };
 
-adForm.addEventListener('reset', (evt) => {
-  evt.preventDefault();
+adForm.addEventListener('reset', () => {
   setDefaultFormParameters();
 });
