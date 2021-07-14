@@ -1,6 +1,12 @@
-import { COORDS_OF_TOKIO } from './data.js';
-import { getSuccessPopupMessage } from './form-submit-messages.js';
-import { mainMarker } from './map.js';
+import {
+  COORDS_OF_TOKIO
+} from './data.js';
+import {
+  getSuccessPopupMessage
+} from './form-submit-messages.js';
+import {
+  mainMarker
+} from './map.js';
 export const adForm = document.querySelector('.ad-form');
 const mapFiltersForm = document.querySelector('.map__filters');
 const adFormElements = adForm.querySelectorAll('.ad-form>fieldset');
@@ -155,25 +161,25 @@ roomNumberSelect.addEventListener('change', (evt) => {
   switchGuestsCapacity(evt.target.value);
 });
 
-export const setFormSubmit = function(onSuccess, onError) {
+export const setFormSubmit = function (onSuccess, onError) {
 
-adForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  const formData = new FormData(evt.target);
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const formData = new FormData(evt.target);
 
-  fetch('https://23.javascript.pages.academy/keksobooking',
-    {
-      method: 'POST',
-      body: formData,
-    },)
-    .then((response) => {
-      if(response.ok){
-      onSuccess();
-    }
-      throw new Error(`${response.status} ${response.statusText}`);
-  })
-    .then(()=>getSuccessPopupMessage())
-    .catch(() => onError());
+    fetch('https://23.javascript.pages.academy/keksobooking', {
+        method: 'POST',
+        body: formData,
+      }, )
+      .then((response) => {
+        if (response.ok) {
+          onSuccess();
+        } else {
+          throw new Error(`${response.status} ${response.statusText}`);
+        }
+      })
+      .then(() => getSuccessPopupMessage())
+      .catch(() => onError());
   });
 };
 const setDefaultPriceValue = function () {
@@ -184,16 +190,17 @@ const setDefaultPriceValue = function () {
     }
   });
 };
-const setDefaultMapParameters = function(){
+const setDefaultMapParameters = function () {
   mainMarker.setLatLng(COORDS_OF_TOKIO);
-  addressInput.value = `${COORDS_OF_TOKIO.lat.toFixed(5)}, ${COORDS_OF_TOKIO.lng.toFixed(5)}`;
+  setTimeout(() => {
+    addressInput.value = `${COORDS_OF_TOKIO.lat.toFixed(5)}, ${COORDS_OF_TOKIO.lng.toFixed(5)}`;
+  }, 0);
 };
+
 
 export const setDefaultFormParameters = function () {
   adForm.reset();
   setDefaultMapParameters();
-  titleInput.value = '';
-  roomNumberSelect.options[0].selected = true;
   setDefaultPriceValue();
   switchGuestsCapacity('1');
 };
