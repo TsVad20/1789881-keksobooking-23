@@ -8,14 +8,14 @@ export const getSuccessPopupMessage = function(){
   successPopupMessageElement.addEventListener('click', (evt) => {
     evt.preventDefault();
     successPopupMessageElement.remove();
-    });
+  });
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape' || evt.key === 'Esc') {
       evt.preventDefault();
       successPopupMessageElement.remove();
     }
   });
-  };
+};
 
 export const getErrorPopupMessage = function () {
   const errorPopupMessageElement = errorSubmitMessage.cloneNode(true);

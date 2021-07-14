@@ -146,7 +146,7 @@ const setGuestCapacity = (rooms) => {
     if (item.value === guestsCapacity[rooms][0]) {
       item.selected = true;
     }
-  })
+  });
 };
 
 export const switchGuestsCapacity = (rooms) => {
@@ -169,9 +169,9 @@ export const setFormSubmit = function (onSuccess, onError) {
     const formData = new FormData(evt.target);
 
     fetch('https://23.javascript.pages.academy/keksobooking', {
-        method: 'POST',
-        body: formData,
-      }, )
+      method: 'POST',
+      body: formData,
+    } )
       .then((response) => {
         if (response.ok) {
           onSuccess();

@@ -31,8 +31,8 @@ const countOfAds = 5; // ограничил размер массива объя
 export const getAdMap = function (cb) {
 
   map.on('load', () => {
-      cb();
-    })
+    cb();
+  })
     .setView(COORDS_OF_TOKIO, 10);
 
   L.tileLayer(
@@ -45,10 +45,10 @@ export const getAdMap = function (cb) {
 
   addressInput.value = `${COORDS_OF_TOKIO.lat.toFixed(5)}, ${COORDS_OF_TOKIO.lng.toFixed(5)}`;
 
-  const addPoints = function(data) {data.slice(0,countOfAds).forEach(item=>{
-    const marker = L.marker(item.location, {icon: pinIcon,});
+  const addPoints = function(data) {data.slice(0,countOfAds).forEach((item)=>{
+    const marker = L.marker(item.location, {icon: pinIcon});
     marker.addTo(map).bindPopup(createPopup(item));
-  })};
+  });};
   getData(addPoints);
 
   mainMarker.on('moveend', (evt) => {

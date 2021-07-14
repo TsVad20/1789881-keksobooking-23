@@ -3,18 +3,6 @@
 
 const ALERT_SHOW_TIME = 5000;
 
-export const getData = (cb) => {
-  return fetch('https://23.javascript.pages.academy/keksobooking/data')
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      showAlert('Не удалось получить данные с сервера.');
-      })
-    .then(json => cb(json))
-    .catch(() => showAlert('Не удалось получить данные с сервера.'));
-};
-
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;
@@ -33,4 +21,14 @@ const showAlert = (message) => {
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
-}
+};
+
+export const getData = (cb) => fetch('https://23.javascript.pages.academy/keksobooking/data')
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    }
+    showAlert('Не удалось получить данные с сервера.');
+  })
+  .then((json) => cb(json))
+  .catch(() => showAlert('Не удалось получить данные с сервера.'));
