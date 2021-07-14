@@ -18,6 +18,7 @@ export const typeOfProperty = adForm.querySelector('#type');
 const typeOfPropertyOptions = typeOfProperty.querySelectorAll('option');
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
+
 const capacitySelect = adForm.querySelector('#capacity');
 const capacityOptions = capacitySelect.querySelectorAll('option');
 export const roomNumberSelect = adForm.querySelector('#room_number');

@@ -28,6 +28,7 @@ export const createPopup = (item) => {
   (!offer.checkin || !offer.checkout) ? popupTextTime.classList.add('hidden'): popupTextTime.textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   (!offer.description) ? popupDescription.classList.add('hidden'): popupDescription.textContent = offer.description;
 
+<<<<<<< HEAD
   if (!offer.features) {
     popupFeaturesList.classList.add('hidden');
   } else {
@@ -35,6 +36,15 @@ export const createPopup = (item) => {
     const modifiers = offer.features.map((feature) => `popup__feature--${feature}`);
 
 
+=======
+  const modifiers = offer.features.map((feature) => {
+    `popup__feature--${feature}`;
+  });
+
+  if (!offer.features) {
+    popupFeaturesList.classList.add('hidden');
+  } else {
+>>>>>>> 3e874ed62e6a08eb7b7a088d5636f943a65b2f2e
     for (const dataFeatureItem of featureListElements) {
       const modifier = dataFeatureItem.classList[1];
       if (!modifiers.includes(modifier)) {
