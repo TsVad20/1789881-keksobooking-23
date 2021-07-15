@@ -1,9 +1,11 @@
-import {generateArrayOfAds} from './utils.js';
 import {COORDS_OF_TOKIO} from './data.js';
 import {addressInput} from './form.js';
 import {createPopup} from './popup.js';
+import {getData} from './create-fetch.js';
 
 const adMap = 'map-canvas';
+
+const map = L.map(adMap);
 
 const mainPinIcon = L.icon({
   iconUrl: '../img/main-pin.svg',
@@ -17,20 +19,20 @@ const pinIcon = L.icon({
   iconAnchor: [20, 40],
 });
 
-const mainMarker = L.marker(
+export const mainMarker = L.marker(
   COORDS_OF_TOKIO, {
     draggable: true,
     icon: mainPinIcon,
   },
 );
-const neiborAdCoords = generateArrayOfAds(10);
+
+const countOfAds = 5; // ограничил размер массива объявлений от сервака для удобства разработки
 
 export const getAdMap = function (cb) {
 
-  const map = L.map(adMap)
-    .on('load', () => {
-      cb();
-    })
+  map.on('load', () => {
+    cb();
+  })
     .setView(COORDS_OF_TOKIO, 10);
 
   L.tileLayer(
@@ -43,12 +45,11 @@ export const getAdMap = function (cb) {
 
   addressInput.value = `${COORDS_OF_TOKIO.lat.toFixed(5)}, ${COORDS_OF_TOKIO.lng.toFixed(5)}`;
 
-  neiborAdCoords.forEach((item) => {
-    const marker = L.marker(item.location, {
-      icon: pinIcon,
-    });
+  const addPoints = function(data) {data.slice(0,countOfAds).forEach((item)=>{
+    const marker = L.marker(item.location, {icon: pinIcon});
     marker.addTo(map).bindPopup(createPopup(item));
-  });
+  });};
+  getData(addPoints);
 
   mainMarker.on('moveend', (evt) => {
     const {
