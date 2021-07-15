@@ -1,20 +1,34 @@
-const adForm = document.querySelector('.ad-form');
+import {
+  COORDS_OF_TOKIO
+} from './data.js';
+import {
+  getSuccessPopupMessage
+} from './form-submit-messages.js';
+import {
+  mainMarker
+} from './map.js';
+export const adForm = document.querySelector('.ad-form');
 const mapFiltersForm = document.querySelector('.map__filters');
 const adFormElements = adForm.querySelectorAll('.ad-form>fieldset');
 export const addressInput = adForm.querySelector('#address');
 const mapFiltersFormElements = mapFiltersForm.querySelectorAll('.map__filters>fieldset');
-const titleInput = document.querySelector('#title');
-const priceInput = adForm.querySelector('#price');
-const typeOfProperty = adForm.querySelector('#type');
+export const titleInput = document.querySelector('#title');
+export const priceInput = adForm.querySelector('#price');
+export const typeOfProperty = adForm.querySelector('#type');
+const typeOfPropertyOptions = typeOfProperty.querySelectorAll('option');
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
 
 const capacitySelect = adForm.querySelector('#capacity');
 const capacityOptions = capacitySelect.querySelectorAll('option');
+<<<<<<< HEAD
 
 const roomNumberSelect = adForm.querySelector('#room_number');
+=======
+export const roomNumberSelect = adForm.querySelector('#room_number');
+>>>>>>> 53620c032d55bfeea5db91719e539addd7b5e9bf
 
-const minPriceOfPropertyType = {
+export const minPriceOfPropertyType = {
   'bungalow': '0',
   'flat': '1000',
   'hotel': '3000',
@@ -83,9 +97,9 @@ titleInput.addEventListener('input', () => {
 
 priceInput.addEventListener('input', () => {
 
-  if (priceInput.value > priceInput.max) {
+  if (+priceInput.value > +priceInput.max) {
     priceInput.setCustomValidity(`Цена не должна превышать ${priceInput.max}.`);
-  } else if (priceInput.value < priceInput.min) {
+  } else if (+priceInput.value < +priceInput.min) {
     priceInput.setCustomValidity(`Цена не должна быть меньше ${priceInput.min}.`);
   } else {
     priceInput.setCustomValidity('');
@@ -132,7 +146,16 @@ timeOut.addEventListener('change', (evt) => {
 }
 и в цикле проверять "если значение содержится (.includes) в массиве по этому ключу, то disabled=false иначе disabled=true*/
 
-const switchGuestsCapacity = (rooms) => {
+const setGuestCapacity = (rooms) => {
+  capacityOptions.forEach((item) => {
+    if (item.value === guestsCapacity[rooms][0]) {
+      item.selected = true;
+    }
+  });
+};
+
+export const switchGuestsCapacity = (rooms) => {
+  setGuestCapacity(rooms);
   capacityOptions.forEach((item) => {
     item.disabled = !guestsCapacity[rooms].includes(`${item.value}`);
   });
@@ -142,4 +165,52 @@ switchGuestsCapacity('1');
 
 roomNumberSelect.addEventListener('change', (evt) => {
   switchGuestsCapacity(evt.target.value);
+});
+
+export const setFormSubmit = function (onSuccess, onError) {
+
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const formData = new FormData(evt.target);
+
+    fetch('https://23.javascript.pages.academy/keksobooking', {
+      method: 'POST',
+      body: formData,
+    } )
+      .then((response) => {
+        if (response.ok) {
+          onSuccess();
+        } else {
+          throw new Error(`${response.status} ${response.statusText}`);
+        }
+      })
+      .then(() => getSuccessPopupMessage())
+      .catch(() => onError());
+  });
+};
+const setDefaultPriceValue = function () {
+  typeOfPropertyOptions.forEach((item) => {
+    if (item.selected) {
+      priceInput.min = '1000';
+      priceInput.placeholder = '1000';
+    }
+  });
+};
+const setDefaultMapParameters = function () {
+  mainMarker.setLatLng(COORDS_OF_TOKIO);
+  setTimeout(() => {
+    addressInput.value = `${COORDS_OF_TOKIO.lat.toFixed(5)}, ${COORDS_OF_TOKIO.lng.toFixed(5)}`;
+  }, 0);
+};
+
+
+export const setDefaultFormParameters = function () {
+  adForm.reset();
+  setDefaultMapParameters();
+  setDefaultPriceValue();
+  switchGuestsCapacity('1');
+};
+
+adForm.addEventListener('reset', () => {
+  setDefaultFormParameters();
 });
