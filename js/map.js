@@ -43,7 +43,7 @@ const removePoints = () => {
 
 export const renderPoints = (point) => {
   const marker = L.marker(point.location, {
-    icon: pinIcon
+    icon: pinIcon,
   });
   marker.addTo(markerGroup).bindPopup(createPopup(point));
 };
@@ -51,9 +51,9 @@ export const renderPoints = (point) => {
 export const getAdMap = function (cb) {
 
   map.on('load', () => {
-      cb();
+  cb();
     })
-  .setView(COORDS_OF_TOKIO, 10);
+.setView(COORDS_OF_TOKIO, 10);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -67,7 +67,7 @@ export const getAdMap = function (cb) {
 
   const addPoints = function (data) {
 
-    data.slice(0,10).forEach(item => renderPoints(item));
+    data.slice(0,10).forEach((item) => renderPoints(item));
 
     mapFiltersForm.querySelector('#housing-type').addEventListener('change', (evt) => {
       removePoints();
