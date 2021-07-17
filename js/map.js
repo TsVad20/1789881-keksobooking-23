@@ -12,9 +12,7 @@ import {
   getData
 } from './create-fetch.js';
 
-
 const adMap = 'map-canvas';
-
 
 const map = L.map(adMap);
 
