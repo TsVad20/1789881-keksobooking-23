@@ -53,7 +53,7 @@ export const getAdMap = function (cb) {
   map.on('load', () => {
       cb();
     })
-    .setView(COORDS_OF_TOKIO, 10);
+  .setView(COORDS_OF_TOKIO, 10);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -72,9 +72,9 @@ export const getAdMap = function (cb) {
     mapFiltersForm.querySelector('#housing-type').addEventListener('change', (evt) => {
       removePoints();
       if (evt.target.value === 'any') {
-        data.slice(0,10).forEach(item => renderPoints(item));
+        data.slice(0,10).forEach((item) => renderPoints(item));
       } else {
-        data.slice(0, 10).filter(item => item.offer.type === `${evt.target.value}`).forEach(point => renderPoints(point));
+        data.slice(0, 10).filter((item) => item.offer.type === `${evt.target.value}`).forEach((point) => renderPoints(point));
       }
     });
   };
