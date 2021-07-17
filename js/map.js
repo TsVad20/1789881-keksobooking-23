@@ -51,9 +51,9 @@ export const renderPoints = (point) => {
 export const getAdMap = function (cb) {
 
   map.on('load', () => {
-  cb();
-    })
-.setView(COORDS_OF_TOKIO, 10);
+    cb();
+  })
+    .setView(COORDS_OF_TOKIO, 10);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
