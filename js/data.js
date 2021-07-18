@@ -42,6 +42,6 @@ export const PRICE_FILTER_RANGES = {
     min: 50000,
     max: Number.MAX_SAFE_INTEGER,
   },
-}
+};
 
 export const POINTS_COUNT = 10;
