@@ -1,9 +1,8 @@
 import {
-  COORDS_OF_TOKIO
+  COORDS_OF_TOKIO,
 } from './data.js';
 import {
   addressInput,
-  mapFiltersForm
 } from './form.js';
 import {
   createPopup
@@ -11,9 +10,11 @@ import {
 import {
   getData
 } from './create-fetch.js';
+import {
+  filterData,
+} from './filters.js';
 
 const adMap = 'map-canvas';
-
 const map = L.map(adMap);
 
 const mainPinIcon = L.icon({
@@ -41,18 +42,20 @@ const removePoints = () => {
   markerGroup.clearLayers();
 };
 
-export const renderPoints = (point) => {
-  const marker = L.marker(point.location, {
-    icon: pinIcon,
+export const renderPoints = (points) => {
+  points.forEach((point) => {
+    const marker = L.marker(point.location, {
+      icon: pinIcon,
+    });
+    marker.addTo(markerGroup).bindPopup(createPopup(point));
   });
-  marker.addTo(markerGroup).bindPopup(createPopup(point));
 };
 
 export const getAdMap = function (cb) {
 
   map.on('load', () => {
-    cb();
-  })
+      cb();
+    })
     .setView(COORDS_OF_TOKIO, 10);
 
   L.tileLayer(
@@ -67,15 +70,11 @@ export const getAdMap = function (cb) {
 
   const addPoints = function (data) {
 
-    data.slice(0,10).forEach((item) => renderPoints(item));
+    renderPoints(data);
 
-    mapFiltersForm.querySelector('#housing-type').addEventListener('change', (evt) => {
+    mapFiltersForm.addEventListener('change', () => {
       removePoints();
-      if (evt.target.value === 'any') {
-        data.slice(0,10).forEach((item) => renderPoints(item));
-      } else {
-        data.slice(0, 10).filter((item) => item.offer.type === `${evt.target.value}`).forEach((point) => renderPoints(point));
-      }
+      filterData(data);
     });
   };
 

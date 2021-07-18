@@ -5,10 +5,11 @@ import {
   getSuccessPopupMessage
 } from './form-submit-messages.js';
 import {
-  mainMarker
+  mainMarker,
 } from './map.js';
+import { mapFiltersForm } from './filters.js';
+
 export const adForm = document.querySelector('.ad-form');
-export const mapFiltersForm = document.querySelector('.map__filters');
 const adFormElements = adForm.querySelectorAll('.ad-form>fieldset');
 export const addressInput = adForm.querySelector('#address');
 const mapFiltersFormElements = mapFiltersForm.querySelectorAll('.map__filters>fieldset');
@@ -170,9 +171,9 @@ export const setFormSubmit = function (onSuccess, onError) {
     const formData = new FormData(evt.target);
 
     fetch('https://23.javascript.pages.academy/keksobooking', {
-      method: 'POST',
-      body: formData,
-    })
+        method: 'POST',
+        body: formData,
+      })
       .then((response) => {
         if (response.ok) {
           onSuccess();
