@@ -1,5 +1,6 @@
 import {
-  COORDS_OF_TOKIO
+  COORDS_OF_TOKIO,
+  RENDER_DELAY
 } from './data.js';
 import {
   addressInput
@@ -14,6 +15,9 @@ import {
   filterData,
   mapFiltersForm
 } from './filters.js';
+import {
+  debounce
+} from './utils/debounce.js';
 
 const adMap = 'map-canvas';
 const map = L.map(adMap);
@@ -55,8 +59,8 @@ export const renderPoints = (points) => {
 export const getAdMap = function (cb) {
 
   map.on('load', () => {
-    cb();
-  })
+      cb();
+    })
     .setView(COORDS_OF_TOKIO, 10);
 
   L.tileLayer(
@@ -74,9 +78,11 @@ export const getAdMap = function (cb) {
     renderPoints(data.slice(0, 10));
 
     mapFiltersForm.addEventListener('change', () => {
-      removePoints();
-      filterData(data);
-    });
+      debounce(() => {
+        removePoints();
+        filterData(data);
+      }, RENDER_DELAY)();
+    })
   };
 
   getData(addPoints);

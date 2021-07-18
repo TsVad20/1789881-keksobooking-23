@@ -45,3 +45,4 @@ export const PRICE_FILTER_RANGES = {
 };
 
 export const POINTS_COUNT = 10;
+export const RENDER_DELAY = 500;
