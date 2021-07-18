@@ -59,8 +59,8 @@ export const renderPoints = (points) => {
 export const getAdMap = function (cb) {
 
   map.on('load', () => {
-      cb();
-    })
+    cb();
+  })
     .setView(COORDS_OF_TOKIO, 10);
 
   L.tileLayer(
