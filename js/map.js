@@ -12,6 +12,7 @@ import {
 } from './create-fetch.js';
 import {
   filterData,
+  mapFiltersForm
 } from './filters.js';
 
 const adMap = 'map-canvas';
@@ -70,7 +71,7 @@ export const getAdMap = function (cb) {
 
   const addPoints = function (data) {
 
-    renderPoints(data);
+    renderPoints(data.slice(0, 10));
 
     mapFiltersForm.addEventListener('change', () => {
       removePoints();

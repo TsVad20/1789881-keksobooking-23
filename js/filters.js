@@ -1,6 +1,5 @@
 import {
   PRICE_FILTER_RANGES,
-  POINTS_COUNT
 } from './data.js';
 
 import {
@@ -8,18 +7,27 @@ import {
 } from './map.js';
 
 export const mapFiltersForm = document.querySelector('.map__filters');
-const houseTypeInput = mapFiltersForm.querySelector('#housing-type');
-const housePriceInput = mapFiltersForm.querySelector('#housing-price');
-const houseRoomsInput = mapFiltersForm.querySelector('#housing-rooms');
-const houseGuestsInput = mapFiltersForm.querySelector('#housing-guests');
+const housingTypeInput = mapFiltersForm.querySelector('#housing-type');
+const housingPriceInput = mapFiltersForm.querySelector('#housing-price');
+const housingRoomsInput = mapFiltersForm.querySelector('#housing-rooms');
+const housingGuestsInput = mapFiltersForm.querySelector('#housing-guests');
+
+const filterSelect = (filterValue, dataValue) => filterValue === 'any' || `${filterValue}` === `${dataValue}`;
+const priceMatch = (filterValue, dataValue) => filterValue === 'any' || PRICE_FILTER_RANGES[filterValue].min <= dataValue && dataValue < PRICE_FILTER_RANGES[filterValue].max;
+const selectFeatures = (filterValue, dataValue) => filterValue.every((feature) => dataValue.includes(feature));
 
 export const filterData = (data) => {
+  const checkedFeatures = Array.from(mapFiltersForm.querySelectorAll('.map__checkbox:checked')).map((element) => element.value);
+  console.log(checkedFeatures);
   const filteredData = data.filter((item) => {
-    const currentType = houseTypeInput.value === 'any' || item.offer.type === houseTypeInput.value;
-    const currentPrice = housePriceInput.value === 'any' || PRICE_FILTER_RANGES[housePriceInput.value].min <= item.offer.price && item.offer.price < PRICE_FILTER_RANGES[housePriceInput.value].max;
-    const currentRooms = houseRoomsInput.value === 'any' || `${item.offer.rooms}` === houseRoomsInput.value;
-    const currentGuests = houseGuestsInput.value === 'any' || `${item.offer.guests}` === houseGuestsInput.value;
-    return currentType && currentPrice && currentRooms && currentGuests;
-  }).slice(0, POINTS_COUNT);
-  renderPoints(filteredData);
+
+    const typeValue = item.offer.type ? item.offer.type : '';
+    const priceValue = item.offer.price ? item.offer.price : '';
+    const roomsValue = item.offer.rooms ? item.offer.rooms : '';
+    const guestsValue = item.offer.guests ? item.offer.guests : '';
+    const featuresValue = item.offer.features ? item.offer.features : [];
+
+    return filterSelect(housingTypeInput.value, typeValue) && priceMatch(housingPriceInput.value, priceValue) && filterSelect(housingRoomsInput.value, roomsValue) && filterSelect(housingGuestsInput.value, guestsValue) && selectFeatures(checkedFeatures, featuresValue);
+  });
+  renderPoints(filteredData.slice(0, 10));
 };
