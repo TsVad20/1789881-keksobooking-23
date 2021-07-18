@@ -82,7 +82,7 @@ export const getAdMap = function (cb) {
         removePoints();
         filterData(data);
       }, RENDER_DELAY)();
-    })
+    });
   };
 
   getData(addPoints);
