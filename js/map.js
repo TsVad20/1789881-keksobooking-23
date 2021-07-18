@@ -1,8 +1,8 @@
 import {
-  COORDS_OF_TOKIO,
+  COORDS_OF_TOKIO
 } from './data.js';
 import {
-  addressInput,
+  addressInput
 } from './form.js';
 import {
   createPopup
@@ -55,8 +55,8 @@ export const renderPoints = (points) => {
 export const getAdMap = function (cb) {
 
   map.on('load', () => {
-      cb();
-    })
+  cb();
+})
     .setView(COORDS_OF_TOKIO, 10);
 
   L.tileLayer(

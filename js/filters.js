@@ -1,5 +1,5 @@
 import {
-  PRICE_FILTER_RANGES,
+  PRICE_FILTER_RANGES
 } from './data.js';
 
 import {
@@ -18,7 +18,6 @@ const selectFeatures = (filterValue, dataValue) => filterValue.every((feature) =
 
 export const filterData = (data) => {
   const checkedFeatures = Array.from(mapFiltersForm.querySelectorAll('.map__checkbox:checked')).map((element) => element.value);
-  console.log(checkedFeatures);
   const filteredData = data.filter((item) => {
 
     const typeValue = item.offer.type ? item.offer.type : '';

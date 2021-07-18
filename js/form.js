@@ -5,7 +5,7 @@ import {
   getSuccessPopupMessage
 } from './form-submit-messages.js';
 import {
-  mainMarker,
+  mainMarker
 } from './map.js';
 import { mapFiltersForm } from './filters.js';
 
@@ -171,9 +171,9 @@ export const setFormSubmit = function (onSuccess, onError) {
     const formData = new FormData(evt.target);
 
     fetch('https://23.javascript.pages.academy/keksobooking', {
-        method: 'POST',
-        body: formData,
-      })
+    method: 'POST',
+    body: formData,
+  })
       .then((response) => {
         if (response.ok) {
           onSuccess();
