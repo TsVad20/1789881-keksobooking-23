@@ -7,8 +7,9 @@ import {
 import {
   mainMarker
 } from './map.js';
+import { mapFiltersForm } from './filters.js';
+
 export const adForm = document.querySelector('.ad-form');
-const mapFiltersForm = document.querySelector('.map__filters');
 const adFormElements = adForm.querySelectorAll('.ad-form>fieldset');
 export const addressInput = adForm.querySelector('#address');
 const mapFiltersFormElements = mapFiltersForm.querySelectorAll('.map__filters>fieldset');
@@ -21,7 +22,8 @@ const timeOut = adForm.querySelector('#timeout');
 
 const capacitySelect = adForm.querySelector('#capacity');
 const capacityOptions = capacitySelect.querySelectorAll('option');
-export const roomNumberSelect = adForm.querySelector('#room_number');
+
+const roomNumberSelect = adForm.querySelector('#room_number');
 
 export const minPriceOfPropertyType = {
   'bungalow': '0',
@@ -171,7 +173,7 @@ export const setFormSubmit = function (onSuccess, onError) {
     fetch('https://23.javascript.pages.academy/keksobooking', {
       method: 'POST',
       body: formData,
-    } )
+    })
       .then((response) => {
         if (response.ok) {
           onSuccess();

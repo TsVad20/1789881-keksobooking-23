@@ -1,10 +1,25 @@
-import {COORDS_OF_TOKIO} from './data.js';
-import {addressInput} from './form.js';
-import {createPopup} from './popup.js';
-import {getData} from './create-fetch.js';
+import {
+  COORDS_OF_TOKIO,
+  RENDER_DELAY
+} from './data.js';
+import {
+  addressInput
+} from './form.js';
+import {
+  createPopup
+} from './popup.js';
+import {
+  getData
+} from './create-fetch.js';
+import {
+  filterData,
+  mapFiltersForm
+} from './filters.js';
+import {
+  debounce
+} from './utils/debounce.js';
 
 const adMap = 'map-canvas';
-
 const map = L.map(adMap);
 
 const mainPinIcon = L.icon({
@@ -26,7 +41,20 @@ export const mainMarker = L.marker(
   },
 );
 
-const countOfAds = 5; // ограничил размер массива объявлений от сервака для удобства разработки
+const markerGroup = L.layerGroup().addTo(map);
+
+const removePoints = () => {
+  markerGroup.clearLayers();
+};
+
+export const renderPoints = (points) => {
+  points.forEach((point) => {
+    const marker = L.marker(point.location, {
+      icon: pinIcon,
+    });
+    marker.addTo(markerGroup).bindPopup(createPopup(point));
+  });
+};
 
 export const getAdMap = function (cb) {
 
@@ -45,10 +73,18 @@ export const getAdMap = function (cb) {
 
   addressInput.value = `${COORDS_OF_TOKIO.lat.toFixed(5)}, ${COORDS_OF_TOKIO.lng.toFixed(5)}`;
 
-  const addPoints = function(data) {data.slice(0,countOfAds).forEach((item)=>{
-    const marker = L.marker(item.location, {icon: pinIcon});
-    marker.addTo(map).bindPopup(createPopup(item));
-  });};
+  const addPoints = function (data) {
+
+    renderPoints(data.slice(0, 10));
+
+    mapFiltersForm.addEventListener('change', () => {
+      debounce(() => {
+        removePoints();
+        filterData(data);
+      }, RENDER_DELAY)();
+    });
+  };
+
   getData(addPoints);
 
   mainMarker.on('moveend', (evt) => {
