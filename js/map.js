@@ -1,23 +1,9 @@
-import {
-  COORDS_OF_TOKIO,
-  RENDER_DELAY
-} from './data.js';
-import {
-  addressInput
-} from './form.js';
-import {
-  createPopup
-} from './popup.js';
-import {
-  getData
-} from './create-fetch.js';
-import {
-  filterData,
-  mapFiltersForm
-} from './filters.js';
-import {
-  debounce
-} from './utils/debounce.js';
+import {COORDS_OF_TOKIO, RENDER_DELAY, POINTS_COUNT} from './data.js';
+import {addressInput} from './form.js';
+import {createPopup} from './popup.js';
+import {getData} from './create-fetch.js';
+import {filterData, mapFiltersForm} from './filters.js';
+import {debounce} from './utils/debounce.js';
 
 const adMap = 'map-canvas';
 const map = L.map(adMap);
@@ -75,7 +61,7 @@ export const getAdMap = function (cb) {
 
   const addPoints = function (data) {
 
-    renderPoints(data.slice(0, 10));
+    renderPoints(data.slice(0, POINTS_COUNT));
 
     mapFiltersForm.addEventListener('change', () => {
       debounce(() => {

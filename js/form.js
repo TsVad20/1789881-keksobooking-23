@@ -1,13 +1,7 @@
-import {
-  COORDS_OF_TOKIO
-} from './data.js';
-import {
-  getSuccessPopupMessage
-} from './form-submit-messages.js';
-import {
-  mainMarker
-} from './map.js';
-import { mapFiltersForm } from './filters.js';
+import {COORDS_OF_TOKIO} from './data.js';
+import {getSuccessPopupMessage} from './form-submit-messages.js';
+import {mainMarker} from './map.js';
+import {mapFiltersForm} from './filters.js';
 
 export const adForm = document.querySelector('.ad-form');
 const adFormElements = adForm.querySelectorAll('.ad-form>fieldset');
@@ -55,6 +49,7 @@ export const activePage = function () {
   });
 
 };
+
 export const unactivePage = function () {
 
   adForm.classList.add('ad-form--disabled');
@@ -70,10 +65,6 @@ export const unactivePage = function () {
   });
 
 };
-/*3.1. Заголовок объявления:
-Обязательное текстовое поле;
-Минимальная длина — 30 символов;
-Максимальная длина — 100 символов.*/
 
 titleInput.addEventListener('input', () => {
   if (titleInput.value.length < titleInput.minlength) {
@@ -86,11 +77,6 @@ titleInput.addEventListener('input', () => {
 
   titleInput.reportValidity();
 });
-
-/*3.2. Цена за ночь:
-Обязательное поле;
-Числовое поле;
-Максимальное значение — 1000000.*/
 
 priceInput.addEventListener('input', () => {
 
@@ -105,21 +91,10 @@ priceInput.addEventListener('input', () => {
   priceInput.reportValidity();
 });
 
-/*3.3. Поле «Тип жилья» влияет на минимальное значение поля «Цена за ночь»:
-«Бунгало» — минимальная цена за ночь 0;
-«Квартира» — минимальная цена за ночь 1 000;
-«Отель» — минимальная цена за ночь 3 000;
-«Дом» — минимальная цена 5 000;
-«Дворец» — минимальная цена 10 000.*/
-
 typeOfProperty.addEventListener('change', (evt) => {
   priceInput.min = `${minPriceOfPropertyType[evt.target.value]}`;
   priceInput.placeholder = `${minPriceOfPropertyType[evt.target.value]}`;
 });
-
-/*3.5. Поля «Время заезда» и «Время выезда» синхронизированы:
-при изменении значения одного поля во втором выделяется соответствующее ему значение.
-Например, если время заезда указано «после 14», то время выезда будет равно «до 14» и наоборот.*/
 
 timeIn.addEventListener('change', (evt) => {
   timeOut.value = evt.target.value;
@@ -127,21 +102,6 @@ timeIn.addEventListener('change', (evt) => {
 timeOut.addEventListener('change', (evt) => {
   timeIn.value = evt.target.value;
 });
-
-/*3.6. Поле «Количество комнат» синхронизировано с полем «Количество мест» таким образом,
-что при выборе количества комнат вводятся ограничения на допустимые варианты выбора количества гостей:
-1 комната — «для 1 гостя»;
-2 комнаты — «для 2 гостей» или «для 1 гостя»;
-3 комнаты — «для 3 гостей», «для 2 гостей» или «для 1 гостя»;
-100 комнат — «не для гостей».*/
-
-/*создать объект где ключ это количество гостей а значение массив доступных вариантов
-{
-  1: ['1'],
-  2: ['1', '2'],
-  ...
-}
-и в цикле проверять "если значение содержится (.includes) в массиве по этому ключу, то disabled=false иначе disabled=true*/
 
 const setGuestCapacity = (rooms) => {
   capacityOptions.forEach((item) => {
@@ -185,6 +145,7 @@ export const setFormSubmit = function (onSuccess, onError) {
       .catch(() => onError());
   });
 };
+
 const setDefaultPriceValue = function () {
   typeOfPropertyOptions.forEach((item) => {
     if (item.selected) {
@@ -193,13 +154,13 @@ const setDefaultPriceValue = function () {
     }
   });
 };
+
 const setDefaultMapParameters = function () {
   mainMarker.setLatLng(COORDS_OF_TOKIO);
   setTimeout(() => {
     addressInput.value = `${COORDS_OF_TOKIO.lat.toFixed(5)}, ${COORDS_OF_TOKIO.lng.toFixed(5)}`;
   }, 0);
 };
-
 
 export const setDefaultFormParameters = function () {
   adForm.reset();

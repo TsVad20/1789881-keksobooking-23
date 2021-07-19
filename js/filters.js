@@ -1,10 +1,5 @@
-import {
-  PRICE_FILTER_RANGES
-} from './data.js';
-
-import {
-  renderPoints
-} from './map.js';
+import {POINTS_COUNT, PRICE_FILTER_RANGES} from './data.js';
+import {renderPoints} from './map.js';
 
 export const mapFiltersForm = document.querySelector('.map__filters');
 const housingTypeInput = mapFiltersForm.querySelector('#housing-type');
@@ -13,7 +8,7 @@ const housingRoomsInput = mapFiltersForm.querySelector('#housing-rooms');
 const housingGuestsInput = mapFiltersForm.querySelector('#housing-guests');
 
 const filterSelect = (filterValue, dataValue) => filterValue === 'any' || `${filterValue}` === `${dataValue}`;
-const priceMatch = (filterValue, dataValue) => filterValue === 'any' || PRICE_FILTER_RANGES[filterValue].min <= dataValue && dataValue < PRICE_FILTER_RANGES[filterValue].max;
+const priceSelect = (filterValue, dataValue) => filterValue === 'any' || PRICE_FILTER_RANGES[filterValue].min <= dataValue && dataValue < PRICE_FILTER_RANGES[filterValue].max;
 const selectFeatures = (filterValue, dataValue) => filterValue.every((feature) => dataValue.includes(feature));
 
 export const filterData = (data) => {
@@ -26,7 +21,7 @@ export const filterData = (data) => {
     const guestsValue = item.offer.guests ? item.offer.guests : '';
     const featuresValue = item.offer.features ? item.offer.features : [];
 
-    return filterSelect(housingTypeInput.value, typeValue) && priceMatch(housingPriceInput.value, priceValue) && filterSelect(housingRoomsInput.value, roomsValue) && filterSelect(housingGuestsInput.value, guestsValue) && selectFeatures(checkedFeatures, featuresValue);
+    return filterSelect(housingTypeInput.value, typeValue) && priceSelect(housingPriceInput.value, priceValue) && filterSelect(housingRoomsInput.value, roomsValue) && filterSelect(housingGuestsInput.value, guestsValue) && selectFeatures(checkedFeatures, featuresValue);
   });
-  renderPoints(filteredData.slice(0, 10));
+  renderPoints(filteredData.slice(0, POINTS_COUNT));
 };
