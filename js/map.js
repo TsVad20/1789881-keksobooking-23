@@ -1,6 +1,7 @@
 import {
   COORDS_OF_TOKIO,
-  RENDER_DELAY
+  RENDER_DELAY,
+  POINTS_COUNT
 } from './data.js';
 import {
   addressInput
@@ -75,7 +76,7 @@ export const getAdMap = function (cb) {
 
   const addPoints = function (data) {
 
-    renderPoints(data.slice(0, 10));
+    renderPoints(data.slice(0, POINTS_COUNT));
 
     mapFiltersForm.addEventListener('change', () => {
       debounce(() => {
