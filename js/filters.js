@@ -1,11 +1,5 @@
-import {
-  POINTS_COUNT,
-  PRICE_FILTER_RANGES
-} from './data.js';
-
-import {
-  renderPoints
-} from './map.js';
+import {POINTS_COUNT, PRICE_FILTER_RANGES} from './data.js';
+import {renderPoints} from './map.js';
 
 export const mapFiltersForm = document.querySelector('.map__filters');
 const housingTypeInput = mapFiltersForm.querySelector('#housing-type');
