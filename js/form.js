@@ -1,12 +1,14 @@
 import {COORDS_OF_TOKIO} from './data.js';
-import {getSuccessPopupMessage} from './form-submit-messages.js';
-import {mainMarker} from './map.js';
+import {getErrorPopupMessage, getSuccessPopupMessage} from './form-submit-messages.js';
+import {addPoints, mainMarker, removePoints} from './map.js';
 import {mapFiltersForm} from './filters.js';
+import {getAdList} from './create-fetch.js';
 
 export const adForm = document.querySelector('.ad-form');
-const adFormElements = adForm.querySelectorAll('.ad-form>fieldset');
+const adFormFieldsets = adForm.querySelectorAll('.ad-form>fieldset');
 export const addressInput = adForm.querySelector('#address');
-const mapFiltersFormElements = mapFiltersForm.querySelectorAll('.map__filters>fieldset');
+const mapFiltersFormFieldsets = mapFiltersForm.querySelectorAll('.map__filters>fieldset');
+const mapFiltersFormSelects = mapFiltersForm.querySelectorAll('.map__filter');
 export const titleInput = document.querySelector('#title');
 export const priceInput = adForm.querySelector('#price');
 export const typeOfProperty = adForm.querySelector('#type');
@@ -34,36 +36,48 @@ const guestsCapacity = {
   100: ['0'],
 };
 
-export const activePage = function () {
+export const activatePage = () => {
 
   adForm.classList.remove('ad-form--disabled');
 
-  adFormElements.forEach((element) => {
-    element.disabled = false;
-  });
+  for (let index = 0; index < adFormFieldsets.length; index++) {
+    adFormFieldsets[index].removeAttribute('disabled');
+  }
+  getAdList(addPoints);
+};
+
+export const activateFilters = () => {
 
   mapFiltersForm.classList.remove('ad-form--disabled');
 
-  mapFiltersFormElements.forEach((element) => {
-    element.disabled = false;
-  });
-
+  for (let index = 0; index < mapFiltersFormFieldsets.length; index++) {
+    mapFiltersFormFieldsets[index].removeAttribute('disabled');
+  }
+  for (let index = 0; index < mapFiltersFormSelects.length; index++) {
+    mapFiltersFormSelects[index].removeAttribute('disabled');
+  }
 };
 
-export const unactivePage = function () {
+export const unactivatePage = (filtersUnactivator) => {
 
   adForm.classList.add('ad-form--disabled');
 
-  adFormElements.forEach((element) => {
-    element.disabled = true;
-  });
+  for (let index = 0; index < adFormFieldsets.length; index++) {
+    adFormFieldsets[index].setAttribute('disabled', 'disabled');
+  }
+  filtersUnactivator();
+};
+
+export const unactivateFilters = () => {
 
   mapFiltersForm.classList.add('ad-form--disabled');
 
-  mapFiltersFormElements.forEach((element) => {
-    element.disabled = true;
-  });
-
+  for (let index = 0; index < mapFiltersFormFieldsets.length; index++) {
+    mapFiltersFormFieldsets[index].setAttribute('disabled', 'disabled');
+  }
+  for (let index = 0; index < mapFiltersFormSelects.length; index++) {
+    mapFiltersFormSelects[index].setAttribute('disabled', 'disabled');
+  }
 };
 
 titleInput.addEventListener('input', () => {
@@ -74,7 +88,6 @@ titleInput.addEventListener('input', () => {
   } else {
     titleInput.setCustomValidity('');
   }
-
   titleInput.reportValidity();
 });
 
@@ -87,7 +100,6 @@ priceInput.addEventListener('input', () => {
   } else {
     priceInput.setCustomValidity('');
   }
-
   priceInput.reportValidity();
 });
 
@@ -164,10 +176,15 @@ const setDefaultMapParameters = function () {
 
 export const setDefaultFormParameters = function () {
   adForm.reset();
+  mapFiltersForm.reset();
+  removePoints();
+  getAdList(addPoints);
   setDefaultMapParameters();
   setDefaultPriceValue();
   switchGuestsCapacity('1');
 };
+
+setFormSubmit(setDefaultFormParameters, getErrorPopupMessage);
 
 adForm.addEventListener('reset', () => {
   setDefaultFormParameters();
