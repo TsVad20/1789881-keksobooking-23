@@ -28,7 +28,7 @@ export const mainMarker = L.marker(
 
 const markerGroup = L.layerGroup().addTo(map);
 
-const removePoints = () => {
+export const removePoints = () => {
   markerGroup.clearLayers();
 };
 
@@ -53,13 +53,6 @@ export const addPoints = function (data) {
   });
 };
 
-export const loadMap = () => {
-  map.on('load', () => {
-      renderAdListOnMap();
-    })
-    .setView(COORDS_OF_TOKIO, 10);
-};
-
 export const renderAdListOnMap = () => {
 
   L.tileLayer(
@@ -80,4 +73,11 @@ export const renderAdListOnMap = () => {
     addressInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
   });
   activateFilters();
+};
+
+export const loadMap = () => {
+  map.on('load', () => {
+    renderAdListOnMap();
+  })
+    .setView(COORDS_OF_TOKIO, 10);
 };

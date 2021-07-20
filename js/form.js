@@ -1,6 +1,6 @@
 import {COORDS_OF_TOKIO} from './data.js';
 import {getErrorPopupMessage, getSuccessPopupMessage} from './form-submit-messages.js';
-import {addPoints, mainMarker} from './map.js';
+import {addPoints, mainMarker, removePoints} from './map.js';
 import {mapFiltersForm} from './filters.js';
 import {getAdList} from './create-fetch.js';
 
@@ -42,7 +42,7 @@ export const activatePage = () => {
 
   for (let index = 0; index < adFormFieldsets.length; index++) {
     adFormFieldsets[index].removeAttribute('disabled');
-  };
+  }
   getAdList(addPoints);
 };
 
@@ -52,10 +52,10 @@ export const activateFilters = () => {
 
   for (let index = 0; index < mapFiltersFormFieldsets.length; index++) {
     mapFiltersFormFieldsets[index].removeAttribute('disabled');
-  };
+  }
   for (let index = 0; index < mapFiltersFormSelects.length; index++) {
     mapFiltersFormSelects[index].removeAttribute('disabled');
-  };
+  }
 };
 
 export const unactivatePage = (filtersUnactivator) => {
@@ -64,7 +64,7 @@ export const unactivatePage = (filtersUnactivator) => {
 
   for (let index = 0; index < adFormFieldsets.length; index++) {
     adFormFieldsets[index].setAttribute('disabled', 'disabled');
-  };
+  }
   filtersUnactivator();
 };
 
@@ -74,10 +74,10 @@ export const unactivateFilters = () => {
 
   for (let index = 0; index < mapFiltersFormFieldsets.length; index++) {
     mapFiltersFormFieldsets[index].setAttribute('disabled', 'disabled');
-  };
+  }
   for (let index = 0; index < mapFiltersFormSelects.length; index++) {
     mapFiltersFormSelects[index].setAttribute('disabled', 'disabled');
-  };
+  }
 };
 
 titleInput.addEventListener('input', () => {
@@ -143,9 +143,9 @@ export const setFormSubmit = function (onSuccess, onError) {
     const formData = new FormData(evt.target);
 
     fetch('https://23.javascript.pages.academy/keksobooking', {
-        method: 'POST',
-        body: formData,
-      })
+      method: 'POST',
+      body: formData,
+    })
       .then((response) => {
         if (response.ok) {
           onSuccess();
@@ -177,6 +177,7 @@ const setDefaultMapParameters = function () {
 export const setDefaultFormParameters = function () {
   adForm.reset();
   mapFiltersForm.reset();
+  removePoints();
   getAdList(addPoints);
   setDefaultMapParameters();
   setDefaultPriceValue();
