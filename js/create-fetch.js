@@ -11,7 +11,6 @@ const showAlert = (message) => {
   alertContainer.style.fontSize = '30px';
   alertContainer.style.textAlign = 'center';
   alertContainer.style.backgroundColor = 'red';
-
   alertContainer.textContent = message;
 
   document.body.append(alertContainer);
@@ -20,7 +19,7 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-export const getData = (cb) => fetch('https://23.javascript.pages.academy/keksobooking/data')
+export const getAdList = (cb) => fetch('https://23.javascript.pages.academy/keksobooking/data')
   .then((response) => {
     if (response.ok) {
       return response.json();

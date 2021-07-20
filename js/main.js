@@ -1,8 +1,7 @@
 import './popup.js';
-import {activePage, setFormSubmit, unactivePage, setDefaultFormParameters} from './form.js';
-import {getAdMap} from './map.js';
-import {getErrorPopupMessage} from './form-submit-messages.js';
+import {unactivatePage, unactivateFilters, activatePage} from './form.js';
+import {loadMap} from './map.js';
 
-unactivePage();
-getAdMap(activePage);
-setFormSubmit(setDefaultFormParameters, getErrorPopupMessage);
+unactivatePage(unactivateFilters);
+activatePage();
+loadMap();

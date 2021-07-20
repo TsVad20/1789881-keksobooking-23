@@ -17,7 +17,7 @@ export const createPopup = (item) => {
   const featureListElements = popupFeaturesList.querySelectorAll('.popup__feature');
   const popupDescription = popupElement.querySelector('.popup__description');
   const newAdPhotoBlock = popupElement.querySelector('.popup__photos');
-  const AdPhoto = popupElement.querySelector('.popup__photo');
+  const adPhoto = popupElement.querySelector('.popup__photo');
   const popupAvatar = popupElement.querySelector('.popup__avatar');
 
   (!offer.title) ? popupTitle.classList.add('hidden'): popupTitle.textContent = offer.title;
@@ -47,11 +47,11 @@ export const createPopup = (item) => {
     newAdPhotoBlock.classList.add('hidden');
   } else {
     for (let photo = 0; photo < offer.photos.length; photo++) {
-      const newAdPhoto = AdPhoto.cloneNode(true);
+      const newAdPhoto = adPhoto.cloneNode(true);
       newAdPhoto.src = offer.photos[photo];
       newAdPhotoBlock.appendChild(newAdPhoto);
     }
-    AdPhoto.remove();
+    adPhoto.remove();
   }
 
   if (!author.avatar) {

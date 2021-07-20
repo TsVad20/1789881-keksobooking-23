@@ -1,7 +1,6 @@
 import {COORDS_OF_TOKIO, RENDER_DELAY, POINTS_COUNT} from './data.js';
-import {addressInput} from './form.js';
+import {activateFilters, addressInput} from './form.js';
 import {createPopup} from './popup.js';
-import {getData} from './create-fetch.js';
 import {filterData, mapFiltersForm} from './filters.js';
 import {debounce} from './utils/debounce.js';
 
@@ -42,12 +41,26 @@ export const renderPoints = (points) => {
   });
 };
 
-export const getAdMap = function (cb) {
+export const addPoints = function (data) {
 
+  renderPoints(data.slice(0, POINTS_COUNT));
+
+  mapFiltersForm.addEventListener('change', () => {
+    debounce(() => {
+      removePoints();
+      filterData(data);
+    }, RENDER_DELAY)();
+  });
+};
+
+export const loadMap = () => {
   map.on('load', () => {
-    cb();
-  })
+      renderAdListOnMap();
+    })
     .setView(COORDS_OF_TOKIO, 10);
+};
+
+export const renderAdListOnMap = () => {
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -59,20 +72,6 @@ export const getAdMap = function (cb) {
 
   addressInput.value = `${COORDS_OF_TOKIO.lat.toFixed(5)}, ${COORDS_OF_TOKIO.lng.toFixed(5)}`;
 
-  const addPoints = function (data) {
-
-    renderPoints(data.slice(0, POINTS_COUNT));
-
-    mapFiltersForm.addEventListener('change', () => {
-      debounce(() => {
-        removePoints();
-        filterData(data);
-      }, RENDER_DELAY)();
-    });
-  };
-
-  getData(addPoints);
-
   mainMarker.on('moveend', (evt) => {
     const {
       lat,
@@ -80,4 +79,5 @@ export const getAdMap = function (cb) {
     } = evt.target.getLatLng();
     addressInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
   });
+  activateFilters();
 };
