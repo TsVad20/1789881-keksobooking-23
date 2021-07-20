@@ -1,3 +1,5 @@
+import { activateFilters } from "./form";
+
 const ALERT_SHOW_TIME = 5000;
 
 const showAlert = (message) => {
@@ -22,6 +24,7 @@ const showAlert = (message) => {
 export const getAdList = (cb) => fetch('https://23.javascript.pages.academy/keksobooking/data')
   .then((response) => {
     if (response.ok) {
+      activateFilters();
       return response.json();
     }
     showAlert('Не удалось получить данные с сервера.');

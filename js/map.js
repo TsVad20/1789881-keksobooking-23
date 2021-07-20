@@ -1,5 +1,5 @@
 import {COORDS_OF_TOKIO, RENDER_DELAY, POINTS_COUNT} from './data.js';
-import {activateFilters, addressInput} from './form.js';
+import {activatePage, addressInput} from './form.js';
 import {createPopup} from './popup.js';
 import {filterData, mapFiltersForm} from './filters.js';
 import {debounce} from './utils/debounce.js';
@@ -72,12 +72,11 @@ export const renderAdListOnMap = () => {
     } = evt.target.getLatLng();
     addressInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
   });
-  activateFilters();
 };
 
 export const loadMap = () => {
   map.on('load', () => {
-    renderAdListOnMap();
+    activatePage();
   })
     .setView(COORDS_OF_TOKIO, 10);
 };

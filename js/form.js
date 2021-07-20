@@ -1,6 +1,6 @@
 import {COORDS_OF_TOKIO} from './data.js';
 import {getErrorPopupMessage, getSuccessPopupMessage} from './form-submit-messages.js';
-import {addPoints, mainMarker, removePoints} from './map.js';
+import {addPoints, mainMarker, removePoints, renderAdListOnMap} from './map.js';
 import {mapFiltersForm} from './filters.js';
 import {getAdList} from './create-fetch.js';
 
@@ -43,7 +43,8 @@ export const activatePage = () => {
   for (let index = 0; index < adFormFieldsets.length; index++) {
     adFormFieldsets[index].removeAttribute('disabled');
   }
-  getAdList(addPoints);
+  getAdList(addPoints).then(()=>{
+    renderAdListOnMap();});
 };
 
 export const activateFilters = () => {
