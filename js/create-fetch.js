@@ -1,4 +1,4 @@
-import { activateFilters } from "./form";
+import { activateFilters } from './form.js';
 
 const ALERT_SHOW_TIME = 5000;
 
