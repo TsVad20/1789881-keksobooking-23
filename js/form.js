@@ -137,7 +137,7 @@ roomNumberSelect.addEventListener('change', (evt) => {
   switchGuestsCapacity(evt.target.value);
 });
 
-export const setFormSubmit = function (onSuccess, onError) {
+export const setFormSubmit = (onSuccess, onError) => {
 
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
@@ -159,7 +159,7 @@ export const setFormSubmit = function (onSuccess, onError) {
   });
 };
 
-const setDefaultPriceValue = function () {
+const setDefaultPriceValue = () => {
   typeOfPropertyOptions.forEach((item) => {
     if (item.selected) {
       priceInput.min = '1000';
@@ -168,14 +168,14 @@ const setDefaultPriceValue = function () {
   });
 };
 
-const setDefaultMapParameters = function () {
+const setDefaultMapParameters = () => {
   mainMarker.setLatLng(COORDS_OF_TOKIO);
   setTimeout(() => {
     addressInput.value = `${COORDS_OF_TOKIO.lat.toFixed(5)}, ${COORDS_OF_TOKIO.lng.toFixed(5)}`;
   }, 0);
 };
 
-export const setDefaultFormParameters = function () {
+export const setDefaultFormParameters = () => {
   adForm.reset();
   mapFiltersForm.reset();
   removePoints();

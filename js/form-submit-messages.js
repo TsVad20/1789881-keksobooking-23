@@ -2,7 +2,7 @@ const successSubmitMessage = document.querySelector('#success').content.querySel
 const errorSubmitMessage = document.querySelector('#error').content.querySelector('.error');
 const bodyElement = document.querySelector('body');
 
-export const getSuccessPopupMessage = function () {
+export const getSuccessPopupMessage = () => {
   const successPopupMessageElement = successSubmitMessage.cloneNode(true);
   bodyElement.appendChild(successPopupMessageElement);
 
@@ -22,7 +22,7 @@ export const getSuccessPopupMessage = function () {
   document.addEventListener('keydown', handleEscClick);
 };
 
-export const getErrorPopupMessage = function () {
+export const getErrorPopupMessage = () => {
   const errorPopupMessageElement = errorSubmitMessage.cloneNode(true);
   const errorButton = errorPopupMessageElement.querySelector('.error__button');
   bodyElement.appendChild(errorPopupMessageElement);

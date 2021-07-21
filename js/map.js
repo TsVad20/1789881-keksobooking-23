@@ -41,7 +41,7 @@ export const renderPoints = (points) => {
   });
 };
 
-export const addPoints = function (data) {
+export const addPoints = (data) => {
 
   renderPoints(data.slice(0, POINTS_COUNT));
 
